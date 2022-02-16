@@ -3,9 +3,23 @@
  */
 package de.stackable.druid.opaauthorizer;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.apache.druid.server.security.*;
 
+
+@JsonTypeName("opa")
 public class OpaAuthorizer implements Authorizer {
+
+    private final String name;
+
+    @JsonCreator
+    public OpaAuthorizer(
+        @JsonProperty("name") String name
+    ) {
+        this.name = name;
+    }
 
     @Override
     public Access authorize(AuthenticationResult authenticationResult, Resource resource, Action action) {
