@@ -22,7 +22,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          cache: maven
+          cache: gradle
       - name: Set up OpenPolicyAgent
         run: |
           curl -L -o opa https://openpolicyagent.org/downloads/v0.33.1/opa_linux_amd64_static
