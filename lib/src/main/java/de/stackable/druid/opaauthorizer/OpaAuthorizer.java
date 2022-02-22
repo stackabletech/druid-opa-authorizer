@@ -6,23 +6,97 @@ package de.stackable.druid.opaauthorizer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.stackable.druid.opaauthorizer.opatypes.OpaMessage;
+import de.stackable.druid.opaauthorizer.opatypes.OpaResource;
+import de.stackable.druid.opaauthorizer.opatypes.OpaResponse;
 import org.apache.druid.server.security.*;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+
+import java.io.IOException;
 
 
 @JsonTypeName("opa")
 public class OpaAuthorizer implements Authorizer {
-
     private final String name;
+    private final String opaUri;
+    private final ObjectMapper objectMapper;
 
     @JsonCreator
     public OpaAuthorizer(
-        @JsonProperty("name") String name
+        @JsonProperty("name") String name,
+        @JsonProperty("opaUri") String opaUri
     ) {
         this.name = name;
+        this.opaUri = opaUri;
+        this.objectMapper = new ObjectMapper();
     }
 
     @Override
     public Access authorize(AuthenticationResult authenticationResult, Resource resource, Action action) {
-        return Access.OK;
+        OpaMessage msg = new OpaMessage(
+                authenticationResult.getIdentity(),
+                action.name(),
+                resource.getName(),
+                resource.getType().toString()
+        );
+        String msgJson;
+        try {
+            msgJson = this.objectMapper.writeValueAsString(msg);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return new Access(false, "An error occurred");
+        }
+        System.out.println("##############################################");
+        System.out.println(String.format("%s: %s - %s", authenticationResult.getIdentity(), resource.toString(), action.toString()));
+        System.out.println(String.format("%s", authenticationResult.getContext()));
+        System.out.println(msgJson);
+        System.out.println("##############################################");
+
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+
+            System.out.println("########### Posting ...");
+            HttpPost httpPost = new HttpPost(this.opaUri);
+            StringEntity requestEntity = new StringEntity(msgJson, ContentType.APPLICATION_JSON);
+            httpPost.setEntity(requestEntity);
+
+            try (CloseableHttpResponse response2 = httpclient.execute(httpPost)) {
+                System.out.println(response2.getCode() + " " + response2.getReasonPhrase());
+                HttpEntity entity2 = response2.getEntity();
+                // do something useful with the response body
+                // and ensure it is fully consumed
+                String response = EntityUtils.toString(entity2);
+                System.out.println(response);
+                OpaResponse opaResponse = this.objectMapper.readValue(response, OpaResponse.class);
+                if (opaResponse.result) {
+                    return Access.OK;
+                } else {
+                    return new Access(false, "Access denied");
+                }
+            }
+        } catch (IOException | ParseException e) {
+            // TODO
+            e.printStackTrace();
+        }
+
+        return new Access(false, "An Error occured");
+    }
+
+    /**
+     * Format the username, action and resource into the JSON required by OPA
+     */
+    private String formatJsonForOpa(AuthenticationResult authenticationResult, Resource resource, Action action) {
+        return String.format("{ \"input\": {\"user\": \"%s\", "
+            + "\"action\": \"%s\", \"resource\": {\"name\": \"%s\", \"type\": \"%s\"}}}",
+            authenticationResult.getIdentity(), action.toString(), resource.getName(), resource.getType());
     }
 }

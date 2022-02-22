@@ -9,12 +9,20 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    // The distribution plugin to distribute our lib with dependencies
+    id 'java-library-distribution'
 }
 
 // Druid uses Java 8
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(8))
+    }
+}
+
+distributions {
+    main {
+        distributionBaseName = 'druid-opa-authorizer'
     }
 }
 
@@ -41,11 +49,15 @@ dependencies {
     // The dependency to import the Authorizer interface
     compileOnly 'org.apache.druid:druid:0.22.1'
 
-    // The dependency to import the Authorizer interface
     compileOnly 'org.apache.druid:druid-core:0.22.1'
 
-    // The dependency to import the Authorizer interface
     compileOnly 'org.apache.druid:druid-server:0.22.1'
+
+    // Http Client lib; We can't use java default because the new HttpClient is only available in Java 11
+    api 'org.apache.httpcomponents.client5:httpclient5:5.1.1'
+
+    // For JSON serialize/deserialize in OPA communication
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
 }
 
 tasks.named('test') {
