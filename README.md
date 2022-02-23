@@ -15,28 +15,34 @@ Packaging it with dependencies:
 Build the distribution (zip with all the dependencies) and put it all in the extensions directory.
 
 ## Configuration Settings
-In the Druid `runtime.properties`:
+The OPA authorizer is created like so:
 
     druid.auth.authorizer.myOpaAuth.type=opa
     druid.auth.authorizer.myOpaAuth.opaUri=http://<host>:<port>/v1/data/my/druid/allow
+
+Then the `myOpaAuth` authorizer needs to be referenced in your authenticator.
 
 ## How to Write Your RegoRules
 
 The authorizer will send a request to the `uri` specified in the config. The input will be:
 
     {
-        user: <user identity>
-        action: <READ/WRITE>
+        user: <String: user name>
+        action: <String: READ|WRITE>
         resource: {
-            name: "MyTable"
-            type: "DATASOURCE"
+            name: <String>
+            type: <String>
         }
     }
 
-The above is an example.
-
-TODO: specify further/better
+For the details - especially the kind of resources - consult the Druid documentation on the [Authentication and Authorization Model](https://druid.apache.org/docs/latest/operations/security-user-auth.html#authentication-and-authorization-model).
 
 ## Troubleshooting
 
 If you get 500 type errors it might be that the internal `druid_system` user doesn't have full permissions.
+
+You can increase log output for the authorizer by adding this snippet to your `log4j.xml`:
+
+    <Logger name="de.stackable.druid.opaauthorizer.OpaAuthorizer" level="trace" additivity="false">
+      <Appender-ref ref="Console"/>
+    </Logger>
