@@ -20,11 +20,13 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.druid.java.util.common.logger.Logger;
 
 import java.io.IOException;
 
 @JsonTypeName("opa")
 public class OpaAuthorizer implements Authorizer {
+    private static final Logger log = new Logger(OpaAuthorizer.class);
     private final String name;
     private final String opaUri;
     private final ObjectMapper objectMapper;
@@ -41,6 +43,14 @@ public class OpaAuthorizer implements Authorizer {
 
     @Override
     public Access authorize(AuthenticationResult authenticationResult, Resource resource, Action action) {
+        log.debug(
+                "Authorizing %s for %s on %s (%s)",
+                authenticationResult.getIdentity(),
+                action.name(),
+                resource.getName(),
+                resource.getType().name()
+        );
+        log.trace("Creating OPA request JSON.");
         OpaMessage msg = new OpaMessage(
                 authenticationResult.getIdentity(),
                 action.name(),
@@ -52,33 +62,25 @@ public class OpaAuthorizer implements Authorizer {
             msgJson = this.objectMapper.writeValueAsString(msg);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return new Access(false, "An error occurred");
+            return new Access(false, "Failed to create the OPA request JSON.");
         }
-        System.out.println("##############################################");
-        System.out.println(String.format("%s: %s - %s", authenticationResult.getIdentity(), resource.toString(), action.toString()));
-        System.out.println(String.format("%s", authenticationResult.getContext()));
-        System.out.println(msgJson);
-        System.out.println("##############################################");
+        log.trace("Preparing HTTP post.");
+        HttpPost httpPost = new HttpPost(this.opaUri);
+        StringEntity requestEntity = new StringEntity(msgJson, ContentType.APPLICATION_JSON);
+        httpPost.setEntity(requestEntity);
 
+        log.trace("Creating HTTP Client and executing post.");
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-
-            System.out.println("########### Posting ...");
-            HttpPost httpPost = new HttpPost(this.opaUri);
-            StringEntity requestEntity = new StringEntity(msgJson, ContentType.APPLICATION_JSON);
-            httpPost.setEntity(requestEntity);
-
-            try (CloseableHttpResponse response2 = httpclient.execute(httpPost)) {
-                System.out.println(response2.getCode() + " " + response2.getReasonPhrase());
-                HttpEntity entity2 = response2.getEntity();
-                // do something useful with the response body
-                // and ensure it is fully consumed
-                String response = EntityUtils.toString(entity2);
-                System.out.println(response);
-                OpaResponse opaResponse = this.objectMapper.readValue(response, OpaResponse.class);
+            try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
+                log.debug("OPA Response code: %s - %s", response.getCode(), response.getReasonPhrase());
+                HttpEntity entity = response.getEntity();
+                log.trace("Parsing OPA response.");
+                String responseString = EntityUtils.toString(entity);
+                OpaResponse opaResponse = this.objectMapper.readValue(responseString, OpaResponse.class);
                 if (opaResponse.result) {
                     return Access.OK;
                 } else {
-                    return new Access(false, "Access denied");
+                    return new Access(false, "Access denied.");
                 }
             }
         } catch (IOException | ParseException e) {
@@ -87,14 +89,5 @@ public class OpaAuthorizer implements Authorizer {
         }
 
         return new Access(false, "An Error occured");
-    }
-
-    /**
-     * Format the username, action and resource into the JSON required by OPA
-     */
-    private String formatJsonForOpa(AuthenticationResult authenticationResult, Resource resource, Action action) {
-        return String.format("{ \"input\": {\"user\": \"%s\", "
-            + "\"action\": \"%s\", \"resource\": {\"name\": \"%s\", \"type\": \"%s\"}}}",
-            authenticationResult.getIdentity(), action.toString(), resource.getName(), resource.getType());
     }
 }
