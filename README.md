@@ -1,6 +1,6 @@
 # Druid Opa Authorizer
 
-by Stackable.
+A Druid extension to request policy decisions from the [Open Policy Agent](https://www.openpolicyagent.org/) (OPA).
 
 ## Building
 Simply building the library:
@@ -36,6 +36,11 @@ The authorizer will send a request to the `uri` specified in the config. The inp
     }
 
 For the details - especially the kind of resources - consult the Druid documentation on the [Authentication and Authorization Model](https://druid.apache.org/docs/latest/operations/security-user-auth.html#authentication-and-authorization-model).
+
+Inside your RegoRules, this snippet of data will be available as `input`. For the details on how to write RegoRule, have a look at the [OPA documentation](https://www.openpolicyagent.org/docs/latest/). 
+
+### Example
+For a simple example, have a look inside the `example` directory.
 
 ## Troubleshooting
 
