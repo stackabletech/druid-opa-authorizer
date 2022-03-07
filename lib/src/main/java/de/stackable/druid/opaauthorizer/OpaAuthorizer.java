@@ -21,6 +21,7 @@ import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.druid.java.util.common.logger.Logger;
+import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
 
@@ -61,8 +62,7 @@ public class OpaAuthorizer implements Authorizer {
         try {
             msgJson = this.objectMapper.writeValueAsString(msg);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new Access(false, "Failed to create the OPA request JSON.");
+            return new Access(false, "Failed to create the OPA request JSON: " + e.toString());
         }
         log.trace("Preparing HTTP post.");
         HttpPost httpPost = new HttpPost(this.opaUri);
@@ -84,10 +84,7 @@ public class OpaAuthorizer implements Authorizer {
                 }
             }
         } catch (IOException | ParseException e) {
-            // TODO
-            e.printStackTrace();
+            return new Access(false, "An error occurred: " + e.toString());
         }
-
-        return new Access(false, "An Error occured");
     }
 }
