@@ -7,9 +7,11 @@ Simply building the library:
 
     ./gradlew build
 
-Packaging it with dependencies:
+To build a zip that's easy to use with Druid use:
 
     ./gradlew distZip
+
+The zip still has to be modified a bit, all the jars should be at the top level. At the moment this needs to be done by hand.
 
 ## Installing
 Build the distribution (zip with all the dependencies) and put it all in the extensions directory.
