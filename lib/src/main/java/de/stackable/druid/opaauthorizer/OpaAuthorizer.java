@@ -11,19 +11,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.stackable.druid.opaauthorizer.opatypes.OpaMessage;
 import de.stackable.druid.opaauthorizer.opatypes.OpaResponse;
 import org.apache.druid.server.security.*;
-import org.apache.hc.client5.http.classic.methods.HttpPost;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.core5.http.ContentType;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.ParseException;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
-import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.druid.java.util.common.logger.Logger;
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 @JsonTypeName("opa")
 public class OpaAuthorizer implements Authorizer {
@@ -45,11 +40,10 @@ public class OpaAuthorizer implements Authorizer {
     @Override
     public Access authorize(AuthenticationResult authenticationResult, Resource resource, Action action) {
         log.debug(
-                "Authorizing %s for %s on %s (%s)",
+                "Authorizing %s for %s on %s",
                 authenticationResult.getIdentity(),
                 action.name(),
-                resource.getName(),
-                resource.getType().name()
+                resource.toString()
         );
         log.trace("Creating OPA request JSON.");
         OpaMessage msg = new OpaMessage(
@@ -62,29 +56,31 @@ public class OpaAuthorizer implements Authorizer {
         try {
             msgJson = this.objectMapper.writeValueAsString(msg);
         } catch (JsonProcessingException e) {
-            return new Access(false, "Failed to create the OPA request JSON: " + e.toString());
+            return new Access(false, "Failed to create the OPA request JSON: " + e);
         }
-        log.trace("Preparing HTTP post.");
-        HttpPost httpPost = new HttpPost(this.opaUri);
-        StringEntity requestEntity = new StringEntity(msgJson, ContentType.APPLICATION_JSON);
-        httpPost.setEntity(requestEntity);
 
         log.trace("Creating HTTP Client and executing post.");
-        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
-                log.debug("OPA Response code: %s - %s", response.getCode(), response.getReasonPhrase());
-                HttpEntity entity = response.getEntity();
-                log.trace("Parsing OPA response.");
-                String responseString = EntityUtils.toString(entity);
-                OpaResponse opaResponse = this.objectMapper.readValue(responseString, OpaResponse.class);
-                if (opaResponse.result) {
-                    return Access.OK;
-                } else {
-                    return new Access(false, "Access denied.");
-                }
+        var client = HttpClient.newHttpClient();
+        try {
+            var request = HttpRequest.newBuilder()
+                    .uri(new URI(this.opaUri))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(msgJson))
+                    .build();
+
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            log.debug("OPA Response code: %s - %s", response.statusCode(), response.body());
+            log.trace("Parsing OPA response.");
+            OpaResponse opaResponse = this.objectMapper.readValue(response.body(), OpaResponse.class);
+            if (opaResponse.result) {
+                return Access.OK;
+            } else {
+                return new Access(false, "Access denied.");
             }
-        } catch (IOException | ParseException e) {
-            return new Access(false, "An error occurred: " + e.toString());
+
+        } catch (Exception e) {
+            return new Access(false, "An error occurred: " + e);
         }
     }
 }
