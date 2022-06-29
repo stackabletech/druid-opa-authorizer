@@ -49,7 +49,7 @@ dependencies {
     // The dependency to import the Authorizer interface
     compileOnly 'org.apache.druid:druid:0.22.1'
 
-    compileOnly 'org.apache.druid:druid-core:0.22.1'
+    compileOnly 'org.apache.druid:druid-core:0.23.0'
 
     compileOnly 'org.apache.druid:druid-server:0.22.1'
 
