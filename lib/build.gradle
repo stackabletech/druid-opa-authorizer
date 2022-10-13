@@ -54,7 +54,7 @@ dependencies {
     compileOnly 'org.apache.druid:druid-server:24.0.0'
 
     // For JSON serialize/deserialize in OPA communication
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
 }
 
 tasks.named('test') {
