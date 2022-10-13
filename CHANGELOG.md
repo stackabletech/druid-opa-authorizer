@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [24.0.0] - 2022-10-13
+
+## Changed
+
+- Changed to Druid dependencies to 24.0.0 ([#xxx]).
+
+[#xxx]: https://github.com/stackabletech/druid-opa-authorizer/pull/xxx
+
 ## [0.2.0] - 2022-03-22
 
 ## Changed
