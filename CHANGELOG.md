@@ -6,7 +6,7 @@
 
 ## Changed
 
-- Changed to Druid dependencies to 24.0.0 ([#57]).
+- Changed Druid dependencies to 24.0.0 ([#57]).
 
 [#57]: https://github.com/stackabletech/druid-opa-authorizer/pull/57
 
