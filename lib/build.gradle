@@ -47,11 +47,11 @@ dependencies {
     implementation 'com.google.guava:guava:30.1.1-jre'
 
     // The dependency to import the Authorizer interface
-    compileOnly 'org.apache.druid:druid:0.23.0'
+    compileOnly 'org.apache.druid:druid:24.0.0'
 
-    compileOnly 'org.apache.druid:druid-core:0.23.0'
+    compileOnly 'org.apache.druid:druid-core:24.0.0'
 
-    compileOnly 'org.apache.druid:druid-server:0.23.0'
+    compileOnly 'org.apache.druid:druid-server:24.0.0'
 
     // For JSON serialize/deserialize in OPA communication
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
