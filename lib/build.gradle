@@ -11,6 +11,8 @@ plugins {
     id 'java-library'
     // The distribution plugin to distribute our lib with dependencies
     id 'java-library-distribution'
+
+    id 'maven-publish'
 }
 
 // Druid 0.23.0 uses Java 11
@@ -60,4 +62,19 @@ dependencies {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        customLibrary(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'sampleRepo'
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
 }
