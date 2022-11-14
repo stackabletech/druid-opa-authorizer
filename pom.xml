@@ -7,8 +7,11 @@
   <artifactId>druid-opa-authorizer</artifactId>
   <version>0.3.0</version>
 
-  <dependencies>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
+  <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
