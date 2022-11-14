@@ -8,19 +8,7 @@
   <version>0.3.0</version>
 
   <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
-    </dependency>
 
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-math3</artifactId>
-      <version>3.6.1</version>
-      <scope>compile</scope>
-    </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
@@ -33,6 +21,7 @@
       <version>2.13.3</version>
       <scope>compile</scope>
     </dependency>
+    <!-- Druid dependencies, provided at runtime by Druid -->
     <dependency>
       <groupId>org.apache.druid</groupId>
       <artifactId>druid-core</artifactId>
@@ -45,10 +34,18 @@
       <version>24.0.0</version>
       <scope>provided</scope>
     </dependency>
+    <!-- JUnit for unit testing -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <!-- compiler plugin configured to use Java 11 (used by Druid) -->
       <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-compiler-plugin</artifactId>
@@ -57,7 +54,6 @@
           <release>11</release>
       </configuration>
       </plugin>
-
       <!-- Maven assembly plugin used to build the zip file for distribution -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
