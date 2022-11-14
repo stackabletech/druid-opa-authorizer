@@ -1,4 +1,4 @@
-package de.stackable.druid.opaauthorizer;
+package tech.stackable.druid.opaauthorizer;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.module.SimpleModule;

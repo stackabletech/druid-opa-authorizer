@@ -1,12 +1,12 @@
-package de.stackable.druid.opaauthorizer;
+package tech.stackable.druid.opaauthorizer;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.stackable.druid.opaauthorizer.opatypes.OpaMessage;
-import de.stackable.druid.opaauthorizer.opatypes.OpaResponse;
+import tech.stackable.druid.opaauthorizer.opatypes.OpaMessage;
+import tech.stackable.druid.opaauthorizer.opatypes.OpaResponse;
 import org.apache.druid.server.security.*;
 import org.apache.druid.java.util.common.logger.Logger;
 

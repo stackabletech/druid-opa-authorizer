@@ -1,4 +1,4 @@
-package de.stackable.druid.opaauthorizer.opatypes;
+package tech.stackable.druid.opaauthorizer.opatypes;
 
 public class OpaResource {
     public String name;
