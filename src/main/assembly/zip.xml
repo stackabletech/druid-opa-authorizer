@@ -2,16 +2,11 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
   <id>zip</id>
-  <includeBaseDirectory>true</includeBaseDirectory>
+  <includeBaseDirectory>false</includeBaseDirectory>
 
   <formats>
     <format>zip</format>
   </formats>
-  <fileSets>
-    <fileSet>
-      <directory>${project.basedir}/conf</directory>
-    </fileSet>
-  </fileSets>
   <files>
     <file>
       <source> ${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
@@ -20,7 +15,7 @@
   </files>
   <dependencySets>
     <dependencySet>
-      <outputDirectory>lib</outputDirectory>
+      <outputDirectory>/</outputDirectory>
       <excludes>
         <exclude>${project.groupId}:${project.artifactId}:jar:*</exclude>
       </excludes>

@@ -5,12 +5,7 @@
 
   <groupId>tech.stackable</groupId>
   <artifactId>druid-opa-authorizer</artifactId>
-  <version>unspecified</version>
-
-  <properties>
-    <maven.compiler.source>1.11</maven.compiler.source>
-    <maven.compiler.target>1.11</maven.compiler.target>
-  </properties>
+  <version>0.3.0</version>
 
   <dependencies>
     <dependency>
