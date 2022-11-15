@@ -3,15 +3,11 @@
 A Druid extension to request policy decisions from the [Open Policy Agent](https://www.openpolicyagent.org/) (OPA).
 
 ## Building
-Simply building the library:
+This repository uses maven:
 
-    ./gradlew build
+  mvn package
 
-To build a zip that's easy to use with Druid use:
-
-    ./gradlew distZip
-
-The zip still has to be modified a bit, all the jars should be at the top level. At the moment this needs to be done by hand.
+The packaged zip plugin is located at `target/druid-opa-authorizer-0.3.0.zip`.
 
 ## Installing
 Build the distribution (zip with all the dependencies) and put it all in the extensions directory.

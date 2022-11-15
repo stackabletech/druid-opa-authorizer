@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## Changed
+
+- Changed build system to Maven ([#61]).
+- Changed module prefix from `de` to `tech` ([#61]).
+
+[#61]: https://github.com/stackabletech/druid-opa-authorizer/pull/61
+
 ## [0.3.0] - 2022-10-13
 
 ## Changed
