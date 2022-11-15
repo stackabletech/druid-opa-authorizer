@@ -11,13 +11,13 @@
   </formats>
   <files>
     <file>
-      <outputDirectory>/</outputDirectory>
-      <source> ${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
+      <outputDirectory>/${project.artifactId}</outputDirectory>
+      <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
     </file>
   </files>
   <dependencySets>
     <dependencySet>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory>/${project.artifactId}</outputDirectory>
       <excludes>
         <exclude>${project.groupId}:${project.artifactId}:jar:*</exclude>
       </excludes>
