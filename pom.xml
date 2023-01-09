@@ -28,7 +28,7 @@
     <dependency>
       <groupId>org.apache.druid</groupId>
       <artifactId>druid-core</artifactId>
-      <version>24.0.0</version>
+      <version>25.0.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
