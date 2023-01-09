@@ -28,13 +28,13 @@
     <dependency>
       <groupId>org.apache.druid</groupId>
       <artifactId>druid-core</artifactId>
-      <version>24.0.0</version>
+      <version>24.0.2</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.druid</groupId>
       <artifactId>druid-server</artifactId>
-      <version>24.0.0</version>
+      <version>24.0.2</version>
       <scope>provided</scope>
     </dependency>
     <!-- JUnit for unit testing -->
