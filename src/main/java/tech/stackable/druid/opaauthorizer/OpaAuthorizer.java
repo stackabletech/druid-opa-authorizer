@@ -4,15 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import tech.stackable.druid.opaauthorizer.opatypes.OpaMessage;
 import tech.stackable.druid.opaauthorizer.opatypes.OpaResponse;
 import org.apache.druid.server.security.*;
 import org.apache.druid.java.util.common.logger.Logger;
 
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -31,7 +30,11 @@ public class OpaAuthorizer implements Authorizer {
     ) {
         this.name = name;
         this.opaUri = opaUri;
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = new ObjectMapper()
+                // https://github.com/stackabletech/druid-opa-authorizer/issues/72
+                // OPA server can send other fields, such as `decision_id`` when enabling decision logs
+                // We could add all the fields we *currently* know, but it's more future-proof to ignore any unknown fields.
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     @Override
