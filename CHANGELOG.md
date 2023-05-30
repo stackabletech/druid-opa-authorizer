@@ -2,17 +2,24 @@
 
 ## [Unreleased]
 
-### Fixed
+## [0.5.0] - 2023-05-30
 
-- Ignore additional JSON fields the OPA server is sending. This can e.g. be the cause when OPA decision logs are enabled ([#74]).
+### Added
+
+- Added support for Druid `26.0.0` ([#75]). 
 
 ### Changed
 
 - Changed build system to Maven ([#61]).
 - Changed module prefix from `de` to `tech` ([#61]).
 
+### Fixed
+
+- Ignore additional JSON fields the OPA server is sending. This can e.g. be the cause when OPA decision logs are enabled ([#74]).
+
 [#61]: https://github.com/stackabletech/druid-opa-authorizer/pull/61
 [#74]: https://github.com/stackabletech/druid-opa-authorizer/pull/74
+[#75]: https://github.com/stackabletech/druid-opa-authorizer/pull/75
 
 ## [0.3.0] - 2022-10-13
 
