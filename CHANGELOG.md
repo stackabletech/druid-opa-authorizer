@@ -6,7 +6,7 @@
 
 ### Added
 
-- Added support for Druid `26.0.0` ([#75]). 
+- Added support for Druid `26.0.0` ([#75]).
 
 ### Changed
 
