@@ -1,15 +1,22 @@
-## Description
+# Description
 
 *Please add a description here. This will become the commit message of the merge request later.*
 
-<!-- Commit message above. Everything below is not added to the message. Do not change this line! -->
 
-## Review Checklist
+## Definition of Done Checklist
+
+- Not all of these items are applicable to all PRs, the author should update this template to only leave the boxes in that are relevant
+- Please make sure all these things are done and tick the boxes
+ 
+```[tasklist]
+# Reviewer
 - [ ] Code contains useful comments
-- [ ] (Integration-)Test cases added (or not applicable)
-- [ ] Documentation added (or not applicable)
-- [ ] Changelog updated (or not applicable)
-- [ ] Cargo.toml only contains references to git tags (not specific commits or branches)
-- [ ] Helm chart can be installed and deployed operator works (or not applicable)
+- [ ] (Integration-)Test cases added
+- [ ] Documentation added or updated
+- [ ] Changelog updated
+```
 
-Once the review is done, comment `bors r+` (or `bors merge`) to merge. [Further information](https://bors.tech/documentation/getting-started/#reviewing-pull-requests)
+```[tasklist]
+# Acceptance
+- [ ] Proper release label has been added
+```
