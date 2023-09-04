@@ -6,6 +6,26 @@
   <artifactId>druid-opa-authorizer</artifactId>
   <version>0.6.0-SNAPSHOT</version>
 
+  <name>Apache Druid OpenPolicyAgent Authorizer</name>
+  <url>https://github.com/stackabletech/druid-opa-authorizer/</url>
+  <organization>
+    <name>Stackable GmbH</name>
+    <url>https://stackable.tech</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>OSL-3.0</name>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:https://github.com/stackabletech/druid-opa-authorizer.git</connection>
+    <developerConnection>scm:git:https://github.com/stackabletech/druid-opa-authorizer.git</developerConnection>
+  </scm>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/stackabletech/druid-opa-authorizer/issues</url>
+  </issueManagement>
+
   <properties>
     <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -27,6 +47,7 @@
     <maven-enforcer-plugin.version>3.4.0</maven-enforcer-plugin.version>
     <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+    <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
     <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
@@ -164,6 +185,11 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>${maven-release-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
