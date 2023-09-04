@@ -1,4 +1,4 @@
-# Druid Open Policy Agent (OPA) Authorizer
+# Apache Druid Open Policy Agent (OPA) Authorizer
 
 An Apache Druid extension to request policy decisions from [Open Policy Agent](https://www.openpolicyagent.org/) (OPA).
 
@@ -53,4 +53,3 @@ You can increase log output for the authorizer by adding this snippet to your `l
         <Logger name="tech.stackable.druid.opaauthorizer.OpaAuthorizer" level="trace" additivity="false">
           <Appender-ref ref="Console"/>
         </Logger>
-
