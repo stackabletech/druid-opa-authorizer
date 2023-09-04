@@ -4,7 +4,7 @@ An Apache Druid extension to request policy decisions from [Open Policy Agent](h
 
 ## Building
 
-This repository uses maven:
+This repository uses Maven and requires at least Java 11 to build:
 
         mvn clean package
 
