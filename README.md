@@ -2,17 +2,26 @@
 
 An Apache Druid extension to request policy decisions from [Open Policy Agent](https://www.openpolicyagent.org/) (OPA).
 
+## Supported Druid versions
+
+This project was tested against these Druid versions:
+
+- 0.23.0
+- 24.0.0
+- 26.0.0
+- 27.0.0
+
 ## Building
 
 This repository uses Maven and requires at least Java 11 to build:
 
         mvn clean package
 
-The packaged zip plugin is located at `target/druid-opa-authorizer-*.zip`.
+The result of this is a JAR file in the `target` directory.
 
 ## Installing
 
-Extract the distribution into the `extensions` directory of your Druid installation.
+Copy the JAR file into the `extensions` directory of your Druid installation.
 
 ## Configuration Settings
 

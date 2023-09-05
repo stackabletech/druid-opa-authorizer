@@ -316,7 +316,7 @@
     <profile>
       <id>druid-24</id>
       <properties>
-        <druid.version>26.0.0</druid.version>
+        <druid.version>24.0.0</druid.version>
         <guava.version>16.0.1</guava.version>
         <guice.version>4.1.0</guice.version>
         <jackson.version>2.10.5</jackson.version>
@@ -324,7 +324,7 @@
       <dependencies>
         <dependency>
           <groupId>org.apache.druid</groupId>
-          <artifactId>druid-processing</artifactId>
+          <artifactId>druid-core</artifactId>
           <version>${druid.version}</version>
           <scope>provided</scope>
         </dependency>
