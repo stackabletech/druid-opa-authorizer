@@ -13,50 +13,50 @@ jobs:
   actionlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-      - uses: reviewdog/action-actionlint@326cc761d95c903f29a111a44888be707f912684 # v1.35.0
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # tag=v4.0.0
+      - uses: reviewdog/action-actionlint@67ec075cacebd361442f6e3ef7671f74c6548909 # v1.38.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   detect-secrets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-      - uses: reviewdog/action-detect-secrets@ced3856ed7f621c5c4e911c8ebc3fa812f59e9dd # tag=v0.11.1
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # tag=v4.0.0
+      - uses: reviewdog/action-detect-secrets@8507d8897b8f9a5d6ce1decbf0a00ac96045f93e # tag=v0.13.0
         with:
           github_token: ${{ secrets.github_token }}
 
   flake8:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-      - uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08 # tag=v4
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # tag=v4.0.0
+      - uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1 # tag=v4.7.0
         with:
           python-version: "3.9"
-      - uses: reviewdog/action-flake8@b6435e67f0cfda225b9e0c9283cfb7ea7c551bdb # tag=v3.6.0
+      - uses: reviewdog/action-flake8@51c2708ac3e9463b4d27d0ba7d9e3ded608a6ad3 # tag=v3.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   markdownlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-      - uses: reviewdog/action-markdownlint@b8f945b8bee2a2967214f35956209bc31d3c4d26 # tag=v0.7
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # tag=v4.0.0
+      - uses: reviewdog/action-markdownlint@ac0f6d50df2117df2471fdc522fb87e39659b3ca # tag=v0.13.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   shellcheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-      - uses: reviewdog/action-shellcheck@66c9a47bf02255b250284a82251cb4cadf5043f5 # tag=v1.15.0
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # tag=v4.0.0
+      - uses: reviewdog/action-shellcheck@96fa305c16b0f9cc9b093af22dcd09de1c8f1c2d # tag=v1.19.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   yamllint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-      - uses: reviewdog/action-yamllint@8c429dfe4fc47b1ce1fa99a64e94693880d5dc30 # tag=v1.6.1
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # tag=v4.0.0
+      - uses: reviewdog/action-yamllint@722e651555c5ca6db0edaada08e049825f74e431 # tag=v1.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
