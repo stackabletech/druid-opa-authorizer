@@ -302,7 +302,7 @@
         <druid.version>0.23.0</druid.version>
         <guava.version>16.0.1</guava.version>
         <guice.version>4.1.0</guice.version>
-        <jackson.version>2.10.5</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
       </properties>
       <dependencies>
         <dependency>
