@@ -62,3 +62,4 @@ You can increase log output for the authorizer by adding this snippet to your `l
         <Logger name="tech.stackable.druid.opaauthorizer.OpaAuthorizer" level="trace" additivity="false">
           <Appender-ref ref="Console"/>
         </Logger>
+
