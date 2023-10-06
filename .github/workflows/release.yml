@@ -33,6 +33,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           maven-development-version-number: ${{ github.event.inputs.development-version }}
           maven-release-version-number: ${{ github.event.inputs.release-version }}
+          release-branch-name: "main"
 
 #      - name: Create Release
 #        id: create_release
