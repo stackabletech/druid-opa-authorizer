@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@7dd9e2a3dc350cf687eb1b2a4fadfee8c8e49675 # tag=v3
 # TODO master -> tag
       - name: Release
-        uses: larsfrancke/github-actions-maven-release@master
+        uses: lfrancke/github-actions-maven-release@master
         env:
           # This action uses a Dockerfile with Java preinstalled
           # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
