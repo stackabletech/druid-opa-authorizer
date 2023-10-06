@@ -23,6 +23,7 @@ jobs:
           # This action uses a Dockerfile with Java preinstalled
           # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
+          SKIP_GIT_SANITY_CHECK: true
         with:
           git-release-bot-name: "stacky-mcstackface"
           git-release-bot-email: "info@stackable.tech"
