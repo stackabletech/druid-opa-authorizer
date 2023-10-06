@@ -18,8 +18,6 @@ jobs:
     strategy:
       matrix:
         profile:
-          - druid-023
-          - druid-24
           - druid-26
           - druid-27
 
