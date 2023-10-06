@@ -33,9 +33,9 @@ jobs:
           maven-release-version-number: ${{ github.event.inputs.release-version }}
           release-branch-name: "main"
 
-#      - name: Create Release
-#        id: create_release
-#        uses: softprops/action-gh-release@v1
-#        with:
-#          files: target/*.jar
-#          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/*.jar
+          token: ${{ secrets.GITHUB_TOKEN }}
