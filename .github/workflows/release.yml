@@ -27,11 +27,13 @@ jobs:
       - name: Release
         uses: qcastel/github-actions-maven-release@master
         env:
+          # This action uses a Dockerfile with Java preinstalled
+          # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
         with:
           git-release-bot-name: "stacky-mcstackface"
           git-release-bot-email: "info@stackable.tech"
-          maven-args: "clean install"
+          maven-args: "clean install -Dmaven.plugin.validation=VERBOSE"
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           maven-development-version-number: ${{ github.event.inputs.development-version }}
           maven-release-version-number: ${{ github.event.inputs.release-version }}
