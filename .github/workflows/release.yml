@@ -23,9 +23,6 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
-      - name: Build JAR
-        run: mvn clean package
-
 # TODO master -> tag
       - name: Release
         uses: qcastel/github-actions-maven-release@master
@@ -37,9 +34,9 @@ jobs:
           maven-development-version-number: ${{ github.event.inputs.development-version }}
           maven-release-version-number: ${{ github.event.inputs.release-version }}
 
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: target/*.jar
-          token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Create Release
+#        id: create_release
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          files: target/*.jar
+#          token: ${{ secrets.GITHUB_TOKEN }}
