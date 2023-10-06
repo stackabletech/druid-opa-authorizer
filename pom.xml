@@ -4,7 +4,7 @@
 
   <groupId>tech.stackable</groupId>
   <artifactId>druid-opa-authorizer</artifactId>
-  <version>23.13-SNAPSHOT</version>
+  <version>23.15-SNAPSHOT</version>
   <!-- The version of the OPA Authorizer coincides with the Stackable Data Platform (SDP) version -->
 
   <name>Apache Druid OpenPolicyAgent Authorizer</name>
@@ -156,8 +156,8 @@
         <version>${maven-enforcer-plugin.version}</version>
         <configuration>
           <rules>
-            <banDuplicatePomDependencyVersions></banDuplicatePomDependencyVersions>
-            <banDynamicVersions></banDynamicVersions>
+            <banDuplicatePomDependencyVersions />
+            <banDynamicVersions />
             <requireActiveProfile>
               <profiles>druid-023,druid-24,druid-26,druid-27</profiles>
               <all>false</all>
@@ -168,7 +168,7 @@
             <requireMavenVersion>
               <version>3.3.9</version>
             </requireMavenVersion>
-            <requirePluginVersions></requirePluginVersions>
+            <requirePluginVersions />
           </rules>
         </configuration>
         <executions>
@@ -242,8 +242,8 @@
             <cleanthat>
               <version>${cleanthat.version}</version>
             </cleanthat>
-            <removeUnusedImports></removeUnusedImports>
-            <formatAnnotations></formatAnnotations>
+            <removeUnusedImports />
+            <formatAnnotations />
             <googleJavaFormat>
               <version>${google-java-format.version}</version>
             </googleJavaFormat>
@@ -252,16 +252,16 @@
             <includes>
               <include>**/*.md</include>
             </includes>
-            <flexmark></flexmark>
+            <flexmark />
           </markdown>
           <json>
             <includes>
               <include>src/**/*.json</include>
             </includes>
-            <jackson></jackson>
+            <jackson />
           </json>
           <pom>
-            <sortPom></sortPom>
+            <sortPom />
           </pom>
         </configuration>
         <executions>
