@@ -34,7 +34,6 @@ jobs:
           release-branch-name: "main"
       - name: Release to GitHub
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/release')
         with:
           files: |
             target/*.jar
