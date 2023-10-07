@@ -9,7 +9,7 @@ on:
       - main
       - "renovate/**"
     tags:
-      - "release/**""
+      - "release/**"
   pull_request:
   merge_group:
 
