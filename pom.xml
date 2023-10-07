@@ -158,8 +158,8 @@
           <rules>
             <banDuplicatePomDependencyVersions/>
             <banDynamicVersions/>
-            <banDuplicatePomDependencyVersions />
-            <banDynamicVersions />
+            <banDuplicatePomDependencyVersions/>
+            <banDynamicVersions/>
             <requireActiveProfile>
               <profiles>druid-023,druid-24,druid-26,druid-27</profiles>
               <all>false</all>
