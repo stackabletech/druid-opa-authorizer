@@ -156,10 +156,10 @@
         <version>${maven-enforcer-plugin.version}</version>
         <configuration>
           <rules>
-            <banDuplicatePomDependencyVersions />
-            <banDynamicVersions />
-            <banDuplicatePomDependencyVersions />
-            <banDynamicVersions />
+            <banDuplicatePomDependencyVersions/>
+            <banDynamicVersions/>
+            <banDuplicatePomDependencyVersions/>
+            <banDynamicVersions/>
             <requireActiveProfile>
               <profiles>druid-023,druid-24,druid-26,druid-27</profiles>
               <all>false</all>
@@ -170,7 +170,7 @@
             <requireMavenVersion>
               <version>3.3.9</version>
             </requireMavenVersion>
-            <requirePluginVersions />
+            <requirePluginVersions/>
           </rules>
         </configuration>
         <executions>
@@ -199,7 +199,7 @@
           <!-- We do not currently want to publish the results in a Maven repo and release will fail if the repositories aren't specified -->
           <arguments>-Dmaven.deploy.skip=true</arguments>
           <scmCommentPrefix>[ci skip]</scmCommentPrefix>
-          <tagNameFormat>@{project.version}</tagNameFormat>
+          <tagNameFormat>release/@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
       <plugin>
@@ -244,8 +244,8 @@
             <cleanthat>
               <version>${cleanthat.version}</version>
             </cleanthat>
-            <removeUnusedImports />
-            <formatAnnotations />
+            <removeUnusedImports/>
+            <formatAnnotations/>
             <googleJavaFormat>
               <version>${google-java-format.version}</version>
             </googleJavaFormat>
@@ -254,19 +254,23 @@
             <includes>
               <include>**/*.md</include>
             </includes>
-            <flexmark />
+            <flexmark/>
           </markdown>
           <json>
             <includes>
               <include>src/**/*.json</include>
             </includes>
-            <jackson />
+            <jackson/>
           </json>
-          <pom>
+          <!--
+           POM rewriting conflicts with the maven-release-plugin.
+           The release plugin rewrites the POM file in a way that is incompatible with spotless, and they change
+           the contents back and forth to match their respective styles. -->
+          <!--pom>
             <sortPom>
               <expandEmptyElements>false</expandEmptyElements>
             </sortPom>
-          </pom>
+          </pom-->
         </configuration>
         <executions>
           <execution>

@@ -8,6 +8,8 @@ on:
     branches:
       - main
       - "renovate/**"
+    tags:
+      - "release/**""
   pull_request:
   merge_group:
 
@@ -33,3 +35,11 @@ jobs:
         run: mvn -B verify -P${{ matrix.profile }}
       - name: Update dependency graph
         uses: advanced-security/maven-dependency-submission-action@c5ad0fd6b977364190852883b46728f25a9617c3 # tag=v3.0.2
+      - name: Release to GitHub
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/release')
+        with:
+          files: |
+            target/*.jar
+            target/bom.*
+          token: ${{ secrets.GITHUB_TOKEN }}
