@@ -4,7 +4,7 @@
 
   <groupId>tech.stackable</groupId>
   <artifactId>druid-opa-authorizer</artifactId>
-  <version>2739439-SNAPSHOT</version>
+  <version>123454</version>
   <!-- The version of the OPA Authorizer coincides with the Stackable Data Platform (SDP) version -->
 
   <name>Apache Druid OpenPolicyAgent Authorizer</name>
@@ -21,7 +21,7 @@
   <scm>
     <connection>scm:git:${project.scm.url}</connection>
     <developerConnection>scm:git:${project.scm.url}</developerConnection>
-    <tag>HEAD</tag>
+    <tag>release/123454</tag>
     <url>git@github.com:lfrancke/druid-opa-authorizer.git</url>
   </scm>
   <issueManagement>
