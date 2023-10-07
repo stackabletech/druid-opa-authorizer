@@ -4,7 +4,7 @@
 
   <groupId>tech.stackable</groupId>
   <artifactId>druid-opa-authorizer</artifactId>
-  <version>245453-SNAPSHOT</version>
+  <version>2739439-SNAPSHOT</version>
   <!-- The version of the OPA Authorizer coincides with the Stackable Data Platform (SDP) version -->
 
   <name>Apache Druid OpenPolicyAgent Authorizer</name>
