@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@7dd9e2a3dc350cf687eb1b2a4fadfee8c8e49675 # tag=v3
-# TODO master -> tag
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # tag=v4.1.0
+      # TODO master -> tag
       - name: Release
         uses: lfrancke/github-actions-maven-release@master
         env:
@@ -33,9 +33,7 @@ jobs:
           maven-release-version-number: ${{ github.event.inputs.release-version }}
           release-branch-name: "main"
       - run: tree
-      - uses: actions/checkout@7dd9e2a3dc350cf687eb1b2a4fadfee8c8e49675 # tag=v3
-        with:
-          ref: release/${{ github.event.inputs.release-version }}
+      - run: gut switch release/${{ github.event.inputs.release-version }}
       - run: mvn clean verify
       - name: Release to GitHub
         uses: softprops/action-gh-release@v1
