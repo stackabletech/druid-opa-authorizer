@@ -32,6 +32,7 @@ jobs:
           maven-development-version-number: ${{ github.event.inputs.development-version }}-SNAPSHOT
           maven-release-version-number: ${{ github.event.inputs.release-version }}
           release-branch-name: "main"
+      - run: tree
       - name: Release to GitHub
         uses: softprops/action-gh-release@v1
         with:
