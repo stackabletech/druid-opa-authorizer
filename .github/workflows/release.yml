@@ -33,6 +33,10 @@ jobs:
           maven-release-version-number: ${{ github.event.inputs.release-version }}
           release-branch-name: "main"
       - run: tree
+      - uses: actions/checkout@7dd9e2a3dc350cf687eb1b2a4fadfee8c8e49675 # tag=v3
+        with:
+          ref: release/${{ github.event.inputs.release-version }}
+      - run: mvn clean verify
       - name: Release to GitHub
         uses: softprops/action-gh-release@v1
         with:
