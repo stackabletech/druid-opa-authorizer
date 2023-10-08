@@ -23,25 +23,25 @@ jobs:
           # This action uses a Dockerfile with Java preinstalled
           # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
-          SKIP_GIT_SANITY_CHECK: true
         with:
           git-release-bot-name: "stacky-mcstackface"
           git-release-bot-email: "info@stackable.tech"
-          maven-args: "clean install -Dmaven.plugin.validation=VERBOSE"
+          maven-args: "clean install"
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           maven-development-version-number: ${{ github.event.inputs.development-version }}-SNAPSHOT
           maven-release-version-number: ${{ github.event.inputs.release-version }}
           release-branch-name: "main"
-      - run: tree
-      - run: git checkout release/${{ github.event.inputs.release-version }}
-      - run: mvn clean verify
-      - name: Release to GitHub
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            target/*.jar
-            target/bom.*
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: release/${{ github.event.inputs.release-version }}
-          generate_release_notes: true
-          name: ${{ github.event.inputs.release-version }}
+      - run: tree ~/.m2/repository/tech/stackable
+
+#      - run: git checkout release/${{ github.event.inputs.release-version }}
+#      - run: mvn clean verify
+#      - name: Release to GitHub
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          files: |
+#            target/*.jar
+#            target/bom.*
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          tag_name: release/${{ github.event.inputs.release-version }}
+#          generate_release_notes: true
+#          name: ${{ github.event.inputs.release-version }}
