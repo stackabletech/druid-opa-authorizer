@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # tag=v4.1.0
       - name: Release
-        uses: lfrancke/github-actions-maven-release@681756a2798ce7fc477d2db2fefcdec6670f6fed # tag=v1.12.41
+        uses: qcastel/github-actions-maven-release@681756a2798ce7fc477d2db2fefcdec6670f6fed # tag=v1.12.41
         env:
           # This action uses a Dockerfile with Java preinstalled
           # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
