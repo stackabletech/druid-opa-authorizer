@@ -31,14 +31,12 @@ jobs:
           maven-development-version-number: ${{ github.event.inputs.development-version }}-SNAPSHOT
           maven-release-version-number: ${{ github.event.inputs.release-version }}
           release-branch-name: "main"
-      - run: tree ~/
-
       - name: Release to GitHub
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            target/checkout/*.jar
-            target/checkout/bom.*
+            target/checkout/target/*.jar
+            target/checkout/target/bom.*
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: release/${{ github.event.inputs.release-version }}
           generate_release_notes: true
