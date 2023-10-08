@@ -31,7 +31,7 @@ jobs:
           maven-development-version-number: ${{ github.event.inputs.development-version }}-SNAPSHOT
           maven-release-version-number: ${{ github.event.inputs.release-version }}
           release-branch-name: "main"
-      - run: tree ~/.m2/repository/tech/stackable
+      - run: tree ~/
 
 #      - run: git checkout release/${{ github.event.inputs.release-version }}
 #      - run: mvn clean verify
