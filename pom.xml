@@ -4,7 +4,8 @@
 
   <groupId>tech.stackable</groupId>
   <artifactId>druid-opa-authorizer</artifactId>
-  <version>0.6.0-SNAPSHOT</version>
+  <version>23.11-SNAPSHOT</version>
+  <!-- The version of the OPA Authorizer coincides with the Stackable Data Platform (SDP) version -->
 
   <name>Apache Druid OpenPolicyAgent Authorizer</name>
   <url>https://github.com/stackabletech/druid-opa-authorizer/</url>
@@ -18,8 +19,10 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:https://github.com/stackabletech/druid-opa-authorizer.git</connection>
-    <developerConnection>scm:git:https://github.com/stackabletech/druid-opa-authorizer.git</developerConnection>
+    <connection>scm:git:${project.scm.url}</connection>
+    <developerConnection>scm:git:${project.scm.url}</developerConnection>
+    <tag>HEAD</tag>
+    <url>git@github.com:stackabletech/druid-opa-authorizer.git</url>
   </scm>
   <issueManagement>
     <system>GitHub</system>
@@ -44,17 +47,17 @@
     <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     <maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
-    <maven-enforcer-plugin.version>3.4.0</maven-enforcer-plugin.version>
+    <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
     <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
-    <spotbugs-maven-plugin.version>4.7.3.5</spotbugs-maven-plugin.version>
+    <spotbugs-maven-plugin.version>4.7.3.6</spotbugs-maven-plugin.version>
     <spotbugs.version>4.7.3</spotbugs.version>
-    <spotless-maven-plugin.version>2.39.0</spotless-maven-plugin.version>
-    <versions-maven-plugin.version>2.16.0</versions-maven-plugin.version>
+    <spotless-maven-plugin.version>2.40.0</spotless-maven-plugin.version>
+    <versions-maven-plugin.version>2.16.1</versions-maven-plugin.version>
   </properties>
 
   <dependencies>
@@ -153,10 +156,12 @@
         <version>${maven-enforcer-plugin.version}</version>
         <configuration>
           <rules>
-            <banDuplicatePomDependencyVersions></banDuplicatePomDependencyVersions>
-            <banDynamicVersions></banDynamicVersions>
+            <banDuplicatePomDependencyVersions />
+            <banDynamicVersions />
+            <banDuplicatePomDependencyVersions />
+            <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-023,druid-24,druid-26,druid-27</profiles>
+              <profiles>druid-26,druid-27</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
@@ -165,7 +170,7 @@
             <requireMavenVersion>
               <version>3.3.9</version>
             </requireMavenVersion>
-            <requirePluginVersions></requirePluginVersions>
+            <requirePluginVersions />
           </rules>
         </configuration>
         <executions>
@@ -190,6 +195,12 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <version>${maven-release-plugin.version}</version>
+        <configuration>
+          <!-- We do not currently want to publish the results in a Maven repo and release will fail if the repositories aren't specified -->
+          <arguments>-Dmaven.deploy.skip=true</arguments>
+          <scmCommentPrefix>[ci skip]</scmCommentPrefix>
+          <tagNameFormat>release/@{project.version}</tagNameFormat>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -233,8 +244,8 @@
             <cleanthat>
               <version>${cleanthat.version}</version>
             </cleanthat>
-            <removeUnusedImports></removeUnusedImports>
-            <formatAnnotations></formatAnnotations>
+            <removeUnusedImports />
+            <formatAnnotations />
             <googleJavaFormat>
               <version>${google-java-format.version}</version>
             </googleJavaFormat>
@@ -243,17 +254,23 @@
             <includes>
               <include>**/*.md</include>
             </includes>
-            <flexmark></flexmark>
+            <flexmark />
           </markdown>
           <json>
             <includes>
               <include>src/**/*.json</include>
             </includes>
-            <jackson></jackson>
+            <jackson />
           </json>
-          <pom>
-            <sortPom></sortPom>
-          </pom>
+          <!--
+           POM rewriting conflicts with the maven-release-plugin.
+           The release plugin rewrites the POM file in a way that is incompatible with spotless, and they change
+           the contents back and forth to match their respective styles. -->
+          <!--pom>
+            <sortPom>
+              <expandEmptyElements>false</expandEmptyElements>
+            </sortPom>
+          </pom-->
         </configuration>
         <executions>
           <execution>
@@ -293,45 +310,14 @@
   For the last years the API interface to Druid didn't change and while the versions of dependencies changed and even the location of classes in JARs the actual interface did not.
   In a compiled Java class the bytecode refers to a String constant of the class it needs to access (e.g. org/apache/druid/server/security/Action) and as long as that name (and its interface) does not change it does not matter in which JAR file the code lives.
   Using these profiles we can get clean compiles against all supported versions but we only use those for CI.
-  The actual final compilation will only happen against a single version and for that we chose the latest Druid version we support.
+  The actual final compilation will only happen against a single version and for that we chose the LTS version of Druid for this particular SDP release.
   -->
   <profiles>
     <profile>
-      <id>druid-023</id>
-      <properties>
-        <druid.version>0.23.0</druid.version>
-        <guava.version>16.0.1</guava.version>
-        <guice.version>4.1.0</guice.version>
-        <jackson.version>2.10.5</jackson.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.apache.druid</groupId>
-          <artifactId>druid-core</artifactId>
-          <version>${druid.version}</version>
-          <scope>provided</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>druid-24</id>
-      <properties>
-        <druid.version>24.0.0</druid.version>
-        <guava.version>16.0.1</guava.version>
-        <guice.version>4.1.0</guice.version>
-        <jackson.version>2.10.5</jackson.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.apache.druid</groupId>
-          <artifactId>druid-core</artifactId>
-          <version>${druid.version}</version>
-          <scope>provided</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
       <id>druid-26</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <druid.version>26.0.0</druid.version>
         <guava.version>16.0.1</guava.version>
@@ -349,9 +335,6 @@
     </profile>
     <profile>
       <id>druid-27</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <druid.version>27.0.0</druid.version>
         <guava.version>19.0</guava.version>

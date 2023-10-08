@@ -1,0 +1,42 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-version:
+        description: 'Version (and git tag) that this release should use'
+        required: true
+      development-version:
+        description: 'Version of the next development version WITHOUT the "-SNAPSHOT" at the end'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # tag=v4.1.0
+      - name: Release
+        uses: lfrancke/github-actions-maven-release@681756a2798ce7fc477d2db2fefcdec6670f6fed # tag=v1.12.41
+        env:
+          # This action uses a Dockerfile with Java preinstalled
+          # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
+          JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
+        with:
+          git-release-bot-name: "stacky-mcstackface"
+          git-release-bot-email: "info@stackable.tech"
+          maven-args: "clean install"
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          maven-development-version-number: ${{ github.event.inputs.development-version }}-SNAPSHOT
+          maven-release-version-number: ${{ github.event.inputs.release-version }}
+          release-branch-name: "main"
+      - name: Release to GitHub
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # tag=v0.1.15
+        with:
+          files: |
+            target/checkout/target/*.jar
+            target/checkout/target/bom.*
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: release/${{ github.event.inputs.release-version }}
+          generate_release_notes: true
+          name: ${{ github.event.inputs.release-version }}
