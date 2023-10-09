@@ -5,10 +5,10 @@ on:
   workflow_dispatch:
     inputs:
       release-version:
-        description: 'Version (and git tag) that this release should use'
+        description: 'Version (and git tag) that this release should use (e.g. 24.4.0)'
         required: true
       development-version:
-        description: 'Version of the next development version WITHOUT the "-SNAPSHOT" at the end'
+        description: 'Version of the next development version WITHOUT the "-SNAPSHOT" at the end (e.g. 24.11.0)'
         required: true
 
 jobs:
