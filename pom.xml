@@ -315,6 +315,7 @@
   <profiles>
     <profile>
       <id>druid-26</id>
+      <!-- LTS version as of 23.11 -->
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
