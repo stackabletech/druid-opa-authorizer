@@ -4,8 +4,7 @@
 
   <groupId>tech.stackable</groupId>
   <artifactId>druid-opa-authorizer</artifactId>
-  <version>9700766-SNAPSHOT</version>
-  <!-- The version of the OPA Authorizer coincides with the Stackable Data Platform (SDP) version -->
+  <version>26.0.0-stackable0-SNAPSHOT</version>
 
   <name>Apache Druid OpenPolicyAgent Authorizer</name>
   <url>https://github.com/stackabletech/druid-opa-authorizer/</url>
@@ -22,7 +21,7 @@
     <connection>scm:git:${project.scm.url}</connection>
     <developerConnection>scm:git:${project.scm.url}</developerConnection>
     <tag>HEAD</tag>
-    <url>git@github.com:lfrancke/druid-opa-authorizer.git</url>
+    <url>git@github.com:stackabletech/druid-opa-authorizer.git</url>
   </scm>
   <issueManagement>
     <system>GitHub</system>
@@ -161,7 +160,7 @@
             <banDuplicatePomDependencyVersions />
             <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-023,druid-24,druid-26,druid-27</profiles>
+              <profiles>druid-26,druid-27</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
@@ -314,7 +313,8 @@
   -->
   <profiles>
     <profile>
-      <id>druid-26</id>
+      <id>druid-26.0.0</id>
+      <!-- LTS version as of 23.11 -->
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -334,7 +334,7 @@
       </dependencies>
     </profile>
     <profile>
-      <id>druid-27</id>
+      <id>druid-27.0.0</id>
       <properties>
         <druid.version>27.0.0</druid.version>
         <guava.version>19.0</guava.version>
