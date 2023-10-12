@@ -4,11 +4,14 @@ name: Build and Release
 on:
   workflow_dispatch:
     inputs:
-      release-version:
-        description: 'Version (and git tag) that this release should use (e.g. 24.4.0)'
+      druid-version:
+        description: 'Druid version to build the authorizer for. This requires an existing profile with the same name.'
         required: true
-      development-version:
-        description: 'Version of the next development version WITHOUT the "-SNAPSHOT" at the end (e.g. 24.11.0)'
+      stackable-version:
+        description: 'The stackable "patch" version to use for this release (starting at 0 and counting up, e.g. "0")'
+        required: true
+      next-stackable-version:
+        description: 'The next stackable version to use, this updates the POM (without the "-SNAPSHOT"). If stackable-version is 0 then set this to 1 etc.'
         required: true
 
 jobs:
@@ -26,10 +29,10 @@ jobs:
         with:
           git-release-bot-name: "stacky-mcstackface"
           git-release-bot-email: "info@stackable.tech"
-          maven-args: "clean install"
+          maven-args: "clean install -P druid-${{ github.event.inputs.druid-version }}"
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          maven-development-version-number: ${{ github.event.inputs.development-version }}-SNAPSHOT
-          maven-release-version-number: ${{ github.event.inputs.release-version }}
+          maven-release-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.events.inputs.stackable-version }}
+          maven-development-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.events.inputs.next-stackable-version}}-SNAPSHOT
           release-branch-name: "main"
       - name: Release to GitHub
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # tag=v0.1.15
@@ -38,6 +41,7 @@ jobs:
             target/checkout/target/*.jar
             target/checkout/target/bom.*
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: release/${{ github.event.inputs.release-version }}
-          generate_release_notes: true
+          tag_name: release/${{ github.event.inputs.druid-version }}-stackable${{ github.events.inputs.stackable-version }}
+          # Due to our current setup it doesn't make sense to generate release notes automatically because the "previous" version might be for something entirely different (e.g. another Druid version)
+          generate_release_notes: false
           name: ${{ github.event.inputs.release-version }}

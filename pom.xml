@@ -314,7 +314,7 @@
   -->
   <profiles>
     <profile>
-      <id>druid-26</id>
+      <id>druid-26.0.0</id>
       <!-- LTS version as of 23.11 -->
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -335,7 +335,7 @@
       </dependencies>
     </profile>
     <profile>
-      <id>druid-27</id>
+      <id>druid-27.0.0</id>
       <properties>
         <druid.version>27.0.0</druid.version>
         <guava.version>19.0</guava.version>
