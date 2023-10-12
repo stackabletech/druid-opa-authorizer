@@ -21,7 +21,7 @@
     <connection>scm:git:${project.scm.url}</connection>
     <developerConnection>scm:git:${project.scm.url}</developerConnection>
     <tag>HEAD</tag>
-    <url>git@github.com:stackabletech/druid-opa-authorizer.git</url>
+    <url>git@github.com:lfrancke/druid-opa-authorizer.git</url>
   </scm>
   <issueManagement>
     <system>GitHub</system>
