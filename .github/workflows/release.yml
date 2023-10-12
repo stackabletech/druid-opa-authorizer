@@ -31,8 +31,8 @@ jobs:
           git-release-bot-email: "info@stackable.tech"
           maven-args: "clean install -P druid-${{ github.event.inputs.druid-version }}"
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          maven-release-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.events.inputs.stackable-version }}
-          maven-development-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.events.inputs.next-stackable-version}}-SNAPSHOT
+          maven-release-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
+          maven-development-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.next-stackable-version}}-SNAPSHOT
           release-branch-name: "main"
       - name: Release to GitHub
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # tag=v0.1.15
@@ -41,7 +41,7 @@ jobs:
             target/checkout/target/*.jar
             target/checkout/target/bom.*
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: release/${{ github.event.inputs.druid-version }}-stackable${{ github.events.inputs.stackable-version }}
+          tag_name: release/${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
           # Due to our current setup it doesn't make sense to generate release notes automatically because the "previous" version might be for something entirely different (e.g. another Druid version)
           generate_release_notes: false
           name: ${{ github.event.inputs.release-version }}
