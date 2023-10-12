@@ -44,4 +44,4 @@ jobs:
           tag_name: release/${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
           # Due to our current setup it doesn't make sense to generate release notes automatically because the "previous" version might be for something entirely different (e.g. another Druid version)
           generate_release_notes: false
-          name: ${{ github.event.inputs.release-version }}
+          name: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.stackable-version }}
