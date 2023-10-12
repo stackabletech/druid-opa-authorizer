@@ -4,7 +4,7 @@
 
   <groupId>tech.stackable</groupId>
   <artifactId>druid-opa-authorizer</artifactId>
-  <version>26.0.0-stackable1-SNAPSHOT</version>
+  <version>26.0.0-stackable0-SNAPSHOT</version>
 
   <name>Apache Druid OpenPolicyAgent Authorizer</name>
   <url>https://github.com/stackabletech/druid-opa-authorizer/</url>
@@ -21,7 +21,7 @@
     <connection>scm:git:${project.scm.url}</connection>
     <developerConnection>scm:git:${project.scm.url}</developerConnection>
     <tag>HEAD</tag>
-    <url>git@github.com:lfrancke/druid-opa-authorizer.git</url>
+    <url>git@github.com:stackabletech/druid-opa-authorizer.git</url>
   </scm>
   <issueManagement>
     <system>GitHub</system>
