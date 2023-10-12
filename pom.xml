@@ -160,7 +160,7 @@
             <banDuplicatePomDependencyVersions />
             <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-26,druid-27</profiles>
+              <profiles>druid-26.0.0,druid-27.0.0</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
