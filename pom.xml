@@ -309,7 +309,6 @@
   For the last years the API interface to Druid didn't change and while the versions of dependencies changed and even the location of classes in JARs the actual interface did not.
   In a compiled Java class the bytecode refers to a String constant of the class it needs to access (e.g. org/apache/druid/server/security/Action) and as long as that name (and its interface) does not change it does not matter in which JAR file the code lives.
   Using these profiles we can get clean compiles against all supported versions but we only use those for CI.
-  The actual final compilation will only happen against a single version and for that we chose the LTS version of Druid for this particular SDP release.
   -->
   <profiles>
     <profile>
