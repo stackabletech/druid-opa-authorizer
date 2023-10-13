@@ -1,0 +1,47 @@
+---
+name: Build and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      druid-version:
+        description: 'Druid version to build the authorizer for. This requires an existing profile with the same name.'
+        required: true
+      stackable-version:
+        description: 'The stackable "patch" version to use for this release (starting at 0 and counting up, e.g. "0")'
+        required: true
+      next-stackable-version:
+        description: 'The next stackable version to use, this updates the POM (without the "-SNAPSHOT"). If stackable-version is 0 then set this to 1 etc.'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # tag=v4.1.0
+      - name: Release
+        uses: qcastel/github-actions-maven-release@681756a2798ce7fc477d2db2fefcdec6670f6fed # tag=v1.12.41
+        env:
+          # This action uses a Dockerfile with Java preinstalled
+          # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
+          JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
+        with:
+          git-release-bot-name: "stacky-mcstackface"
+          git-release-bot-email: "info@stackable.tech"
+          maven-args: "clean install -P druid-${{ github.event.inputs.druid-version }}"
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          maven-release-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
+          maven-development-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.next-stackable-version}}-SNAPSHOT
+          release-branch-name: "main"
+      - name: Release to GitHub
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # tag=v0.1.15
+        with:
+          files: |
+            target/checkout/target/*.jar
+            target/checkout/target/bom.*
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: release/${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
+          # Due to our current setup it doesn't make sense to generate release notes automatically because the "previous" version might be for something entirely different (e.g. another Druid version)
+          generate_release_notes: false
+          name: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
