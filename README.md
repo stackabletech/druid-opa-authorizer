@@ -70,7 +70,7 @@ You can increase log output for the authorizer by adding this snippet to your `l
 2. Add the new profile to the `requireActiveProfile` enforcer rule
 3. Update `.github/workflows/maven.yml` to include the new profile in CI
 4. Update `README.md` to name the newly supported version
-                            
+
 ### Release
 
 To release this run the relevant [GitHub Action](https://github.com/stackabletech/druid-opa-authorizer/actions/workflows/release.yml) which asks for various inputs.
