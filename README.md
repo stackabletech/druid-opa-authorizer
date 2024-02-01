@@ -70,6 +70,7 @@ You can increase log output for the authorizer by adding this snippet to your `l
 2. Add the new profile to the `requireActiveProfile` enforcer rule
 3. Update `.github/workflows/maven.yml` to include the new profile in CI
 4. Update `README.md` to name the newly supported version
+5. _After_ the PR has been merged update the GitHub settings to require the new Druid version to pass
 
 ### Release
 
