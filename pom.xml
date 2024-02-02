@@ -36,15 +36,15 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <cleanthat.version>2.17</cleanthat.version>
-    <error-prone.version>2.21.1</error-prone.version>
-    <google-java-format.version>1.17.0</google-java-format.version>
+    <error-prone.version>2.24.1</error-prone.version>
+    <google-java-format.version>1.19.2</google-java-format.version>
 
-    <cyclonedx-maven-plugin.version>2.7.9</cyclonedx-maven-plugin.version>
+    <cyclonedx-maven-plugin.version>2.7.11</cyclonedx-maven-plugin.version>
     <findsecbugs-plugin.version>1.12.0</findsecbugs-plugin.version>
-    <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
-    <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
-    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-    <maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
+    <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+    <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
+    <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+    <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
     <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
@@ -52,11 +52,11 @@
     <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
     <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-    <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
-    <spotbugs-maven-plugin.version>4.7.3.6</spotbugs-maven-plugin.version>
-    <spotbugs.version>4.7.3</spotbugs.version>
-    <spotless-maven-plugin.version>2.40.0</spotless-maven-plugin.version>
-    <versions-maven-plugin.version>2.16.1</versions-maven-plugin.version>
+    <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+    <spotbugs-maven-plugin.version>4.8.3.0</spotbugs-maven-plugin.version>
+    <spotbugs.version>4.8.3</spotbugs.version>
+    <spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
+    <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
   </properties>
 
   <dependencies>
@@ -160,7 +160,7 @@
             <banDuplicatePomDependencyVersions />
             <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-26.0.0,druid-27.0.0</profiles>
+              <profiles>druid-26.0.0,druid-27.0.0,druid-28.0.1</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
@@ -339,6 +339,23 @@
         <guava.version>19.0</guava.version>
         <guice.version>4.1.0</guice.version>
         <jackson.version>2.10.5</jackson.version>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.druid</groupId>
+          <artifactId>druid-processing</artifactId>
+          <version>${druid.version}</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>druid-28.0.1</id>
+      <properties>
+        <druid.version>28.0.1</druid.version>
+        <guava.version>31.1-jre</guava.version>
+        <guice.version>4.1.0</guice.version>
+        <jackson.version>2.12.7</jackson.version>
       </properties>
       <dependencies>
         <dependency>
