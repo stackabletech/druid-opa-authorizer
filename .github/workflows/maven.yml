@@ -22,7 +22,7 @@ jobs:
         profile:
           - druid-26.0.0
           - druid-27.0.0
-          - druid-28.0.0
+          - druid-28.0.1
 
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # tag=v4.1.1

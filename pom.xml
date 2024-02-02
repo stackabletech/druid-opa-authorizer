@@ -160,7 +160,7 @@
             <banDuplicatePomDependencyVersions />
             <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-26.0.0,druid-27.0.0,druid-28.0.0</profiles>
+              <profiles>druid-26.0.0,druid-27.0.0,druid-28.0.1</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
@@ -350,9 +350,9 @@
       </dependencies>
     </profile>
     <profile>
-      <id>druid-28.0.0</id>
+      <id>druid-28.0.1</id>
       <properties>
-        <druid.version>28.0.0</druid.version>
+        <druid.version>28.0.1</druid.version>
         <guava.version>31.1-jre</guava.version>
         <guice.version>4.1.0</guice.version>
         <jackson.version>2.12.7</jackson.version>
