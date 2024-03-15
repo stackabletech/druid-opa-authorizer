@@ -45,11 +45,7 @@ public class OpaAuthorizer implements Authorizer {
         authenticationResult.getIdentity(), action.name(), resource.toString());
     LOG.trace("Creating OPA request JSON.");
     OpaMessage msg =
-        new OpaMessage(
-            authenticationResult.getIdentity(),
-            action.name(),
-            resource.getName(),
-            resource.getType());
+        new OpaMessage(authenticationResult, action.name(), resource.getName(), resource.getType());
     String msgJson;
     try {
       msgJson = objectMapper.writeValueAsString(msg);
