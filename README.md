@@ -36,7 +36,12 @@ Then the `myOpaAuth` authorizer needs to be referenced in your authenticator.
 The authorizer will send a request to the `uri` specified in the config. The input will be:
 
         {
-            user: <String: user name>
+            authenticationResult: {
+                identity: <String: user name>
+                authorizerName: <String>
+                authenticatedBy: <String>
+                context: Map<String, Object>
+            }
             action: <String: READ|WRITE>
             resource: {
                 name: <String>
