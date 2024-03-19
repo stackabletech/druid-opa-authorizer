@@ -35,4 +35,5 @@ jobs:
       - name: Build with Maven
         run: mvn -B verify -P${{ matrix.profile }}
       - name: Update dependency graph
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: advanced-security/maven-dependency-submission-action@ed72a3242c5331913886b41ca9ea66c9195ebdaa # tag=v4.0.0
