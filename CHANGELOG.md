@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+
+## [0.6.0] - 2024-03-19
+
+### Changed
+
+- BREAKING: Add authenticationResult to OPA input ([#85]).
+
+[#85]: https://github.com/stackabletech/druid-opa-authorizer/pull/85
+
 ## [0.5.0] - 2023-05-30
 
 ### Added
