@@ -16,7 +16,6 @@
 
 [#85]: https://github.com/stackabletech/druid-opa-authorizer/pull/85
 
-
 ## [0.5.0] - 2023-05-30
 
 ### Added
