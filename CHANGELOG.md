@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Added support for Druid 30.0.0 and removed support for Druid 27.0.0 ([#104])
+
+[#104]: https://github.com/stackabletech/druid-opa-authorizer/pull/104
+
 ## [0.6.0] - 2024-03-19
 
 ### Changed
@@ -9,6 +15,7 @@
 - BREAKING: Add authenticationResult to OPA input ([#85]).
 
 [#85]: https://github.com/stackabletech/druid-opa-authorizer/pull/85
+
 
 ## [0.5.0] - 2023-05-30
 
