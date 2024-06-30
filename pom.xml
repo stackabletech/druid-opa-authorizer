@@ -160,7 +160,7 @@
             <banDuplicatePomDependencyVersions />
             <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-26.0.0,druid-27.0.0,druid-28.0.1</profiles>
+              <profiles>druid-26.0.0,druid-28.0.1,druid-30.0.0</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
@@ -313,30 +313,9 @@
   <profiles>
     <profile>
       <id>druid-26.0.0</id>
-      <!-- LTS version as of 23.11 -->
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <druid.version>26.0.0</druid.version>
         <guava.version>16.0.1</guava.version>
-        <guice.version>4.1.0</guice.version>
-        <jackson.version>2.10.5</jackson.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.apache.druid</groupId>
-          <artifactId>druid-processing</artifactId>
-          <version>${druid.version}</version>
-          <scope>provided</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>druid-27.0.0</id>
-      <properties>
-        <druid.version>27.0.0</druid.version>
-        <guava.version>19.0</guava.version>
         <guice.version>4.1.0</guice.version>
         <jackson.version>2.10.5</jackson.version>
       </properties>
@@ -358,6 +337,34 @@
         <jackson.version>2.12.7</jackson.version>
       </properties>
       <dependencies>
+        <dependency>
+          <groupId>org.apache.druid</groupId>
+          <artifactId>druid-processing</artifactId>
+          <version>${druid.version}</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <!-- LTS version as of 24.7 -->
+      <id>druid-30.0.0</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <druid.version>30.0.0</druid.version>
+        <guava.version>32.0.1-jre</guava.version>
+        <guice.version>4.1.0</guice.version>
+        <!-- jackson.version in 30.0.0 is actually specified as 2.12.7.20221012 but according to the release notes https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1: https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom so we override that here -->
+        <jackson.version>2.12.7</jackson.version>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.12.7.1</version>
+          <scope>provided</scope>
+        </dependency>
         <dependency>
           <groupId>org.apache.druid</groupId>
           <artifactId>druid-processing</artifactId>
