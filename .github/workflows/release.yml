@@ -19,13 +19,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b # v4.1.5
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Release
         uses: qcastel/github-actions-maven-release@681756a2798ce7fc477d2db2fefcdec6670f6fed # tag=v1.12.41
         env:
           # This action uses a Dockerfile with Java preinstalled
           # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
-          JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
+          JAVA_HOME: /usr/lib/jvm/java-17-openjdk/
         with:
           git-release-bot-name: "stacky-mcstackface"
           git-release-bot-email: "info@stackable.tech"
@@ -35,7 +35,7 @@ jobs:
           maven-development-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.next-stackable-version}}-SNAPSHOT
           release-branch-name: "main"
       - name: Release to GitHub
-        uses: softprops/action-gh-release@69320dbe05506a9a39fc8ae11030b214ec2d1f87 # v2.0.5
+        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v2.0.8
         with:
           files: |
             target/checkout/target/*.jar
