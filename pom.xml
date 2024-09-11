@@ -29,7 +29,6 @@
   </issueManagement>
 
   <properties>
-    <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -314,6 +313,7 @@
     <profile>
       <id>druid-26.0.0</id>
       <properties>
+        <java.version>11</java.version>
         <druid.version>26.0.0</druid.version>
         <guava.version>16.0.1</guava.version>
         <guice.version>4.1.0</guice.version>
@@ -335,6 +335,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
+        <java.version>17</java.version>
         <druid.version>30.0.0</druid.version>
         <guava.version>32.0.1-jre</guava.version>
         <guice.version>4.1.0</guice.version>
