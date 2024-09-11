@@ -4,9 +4,9 @@
 
 ### Changed
 
-- Added support for Druid 30.0.0 and removed support for Druid 27.0.0 ([#104])
-- Removed support for Druid 28.0.1 ([#105])
-- Update dependencies ([#106])
+- Added support for Druid 30.0.0 and removed support for Druid 27.0.0 ([#104]).
+- Removed support for Druid 28.0.1 ([#105]).
+- Update dependencies ([#106]).
 
 [#104]: https://github.com/stackabletech/druid-opa-authorizer/pull/104
 [#105]: https://github.com/stackabletech/druid-opa-authorizer/pull/105
