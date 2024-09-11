@@ -21,7 +21,6 @@ jobs:
       matrix:
         profile:
           - druid-26.0.0
-          - druid-28.0.1
           - druid-30.0.0
 
     steps:
