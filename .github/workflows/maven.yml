@@ -20,19 +20,21 @@ jobs:
     strategy:
       matrix:
         profile:
-          - druid-26.0.0
-          - druid-30.0.0
-
+          - { druid: druid-26.0.0, java: '11' }
+          - { druid: druid-30.0.0, java: '17' }
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - name: Set up JDK 17
+
+      - name: Set up JDK
         uses: actions/setup-java@2dfa2011c5b2a0f1489bf9e433881c92c1631f88 # v4.3.0
         with:
-          java-version: '17'
+          java-version: ${{ matrix.profile.java }}
           distribution: 'temurin'
           cache: maven
+
       - name: Build with Maven
-        run: mvn -B verify -P${{ matrix.profile }}
+        run: mvn -B verify -P${{ matrix.profile.druid }}
+
       - name: Update dependency graph
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: advanced-security/maven-dependency-submission-action@4f64ddab9d742a4806eeb588d238e4c311a8397d # v4.1.1
