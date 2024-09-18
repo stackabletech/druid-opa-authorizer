@@ -27,11 +27,11 @@ jobs:
         id: set_java_version
         run: |
           if [ "${{ github.event.inputs.druid-version }}" = "druid-26.0.0" ]; then
-            echo "JAVA_VERSION=11" >> $GITHUB_ENV
+            echo "JAVA_VERSION=11" >> "$GITHUB_ENV"
           elif [ "${{ github.event.inputs.druid-version }}" = "druid-30.0.0" ]; then
-            echo "JAVA_VERSION=17" >> $GITHUB_ENV
+            echo "JAVA_VERSION=17" >> "$GITHUB_ENV"
           else
-            echo "JAVA_VERSION=unknown" >> $GITHUB_ENV
+            echo "JAVA_VERSION=unknown" >> "$GITHUB_ENV"
           fi
 
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
