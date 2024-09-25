@@ -14,42 +14,44 @@ on:
       stackable-version:
         description: 'The stackable "patch" version to use for this release (e.g., "0").'
         required: true
-      next-stackable-version:
-        description: 'The next stackable version to use, this updates the POM (without the "-SNAPSHOT"). If stackable-version is 0 then set this to 1 etc.'
-        required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set Java Version
-        id: set_java_version
+      - name: Set up Java
+        id: setup_java
+        uses: actions/setup-java@b36c23c0d998641eff861008f374ee103c25ac73 # v4.4.0
+        with:
+          distribution: 'temurin'
+          java-version: ${{ github.event.inputs.druid-version == 'druid-26.0.0' && '11' || '17' }}
+          cache: 'maven'
+
+      - name: Set variables
+        id: vars
         run: |
-          if [ "${{ github.event.inputs.druid-version }}" = "druid-26.0.0" ]; then
-            echo "JAVA_VERSION=11" >> "$GITHUB_ENV"
-          elif [ "${{ github.event.inputs.druid-version }}" = "druid-30.0.0" ]; then
-            echo "JAVA_VERSION=17" >> "$GITHUB_ENV"
-          else
-            echo "JAVA_VERSION=unknown" >> "$GITHUB_ENV"
-          fi
+          VERSION=${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - name: Release
-        uses: qcastel/github-actions-maven-release@681756a2798ce7fc477d2db2fefcdec6670f6fed # tag=v1.12.41
-        env:
-          # This action uses a Dockerfile with Java preinstalled
-          # See here for the list of supported JDKs: https://github.com/qcastel/docker-maven-release/blob/master/Dockerfile
-          JAVA_HOME: /usr/lib/jvm/java-${{ env.JAVA_VERSION }}-openjdk/
-        with:
-          git-release-bot-name: "stacky-mcstackface"
-          git-release-bot-email: "info@stackable.tech"
-          maven-args: "clean install -P ${{ github.event.inputs.druid-version }}"
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          maven-release-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
-          maven-development-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.next-stackable-version }}-SNAPSHOT
-          release-branch-name: "main"
+      - name: Run Maven Release Prepare
+        run: |
+          mvn -B release:prepare \
+            -DpreparationProfiles=${{ github.event.inputs.druid-version }} \
+            -DreleaseVersion=${{ env.VERSION }} \
+            -DupdateWorkingCopyVersions=false \
+            -DpushChanges=false
+
+      - name: Push release branch
+        run: git push origin release/${{ env.VERSION }}
+
+      - name: Run Maven Release Perform
+        run: |
+          mvn -B release:perform \
+            -DreleaseProfiles=${{ github.event.inputs.druid-version }} \
+            -Dgoals="clean install"
 
       - name: Release to GitHub
         uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v2.0.8
