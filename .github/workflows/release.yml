@@ -36,6 +36,11 @@ jobs:
           VERSION=${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
+      - name: Configure Git Identity
+        run: |
+          git config --global user.email "info@stackable.tech"
+          git config --global user.name "stacky-mcstackface"
+
       - name: Run Maven Release Prepare
         run: |
           mvn -B release:prepare \
