@@ -56,7 +56,8 @@ jobs:
         run: |
           mvn -B release:perform \
             -DreleaseProfiles=${{ github.event.inputs.druid-version }} \
-            -Dgoals="clean install"
+            -Dgoals="clean install" \
+            -Dscm.url=https://github.com/stackabletech/druid-opa-authorizer.git
 
       - name: Release to GitHub
         uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v2.0.8
