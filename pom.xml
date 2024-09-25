@@ -224,6 +224,9 @@
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
         <version>${cyclonedx-maven-plugin.version}</version>
+        <configuration>
+          <skipNotDeployed>false</skipNotDeployed>
+        </configuration>
         <executions>
           <execution>
             <goals>
