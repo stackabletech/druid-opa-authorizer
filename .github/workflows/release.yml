@@ -9,8 +9,9 @@ on:
         required: true
         type: choice
         options:
-          - druid-26.0.0
           - druid-30.0.0
+          - druid-30.0.1
+          - druid-31.0.1
       stackable-version:
         description: 'The stackable "patch" version to use for this release (e.g., "0").'
         required: true
@@ -26,9 +27,7 @@ jobs:
       - name: Set Java Version
         id: set_java_version
         run: |
-          if [ "${{ github.event.inputs.druid-version }}" = "druid-26.0.0" ]; then
-            echo "JAVA_VERSION=11" >> "$GITHUB_ENV"
-          elif [ "${{ github.event.inputs.druid-version }}" = "druid-30.0.0" ]; then
+          if [ "${{ github.event.inputs.druid-version }}" = "druid-30.0.0" ]; then
             echo "JAVA_VERSION=17" >> "$GITHUB_ENV"
           else
             echo "JAVA_VERSION=unknown" >> "$GITHUB_ENV"
