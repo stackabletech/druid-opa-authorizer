@@ -27,7 +27,7 @@ jobs:
       - name: Set Java Version
         id: set_java_version
         run: |
-          if [ "${{ github.event.inputs.druid-version }}" = "druid-30.0.0" ]; then
+          if [ "${{ github.event.inputs.druid-version }}" == "druid-30.0.0" ] || [ "${{ github.event.inputs.druid-version }}" == "druid-30.0.1" ] || [ "${{ github.event.inputs.druid-version }}" == "druid-31.0.1" ]; then
             echo "JAVA_VERSION=17" >> "$GITHUB_ENV"
           else
             echo "JAVA_VERSION=unknown" >> "$GITHUB_ENV"
