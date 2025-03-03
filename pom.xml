@@ -38,24 +38,24 @@
     <error-prone.version>2.27.1</error-prone.version>
     <google-java-format.version>1.19.2</google-java-format.version>
 
-    <cyclonedx-maven-plugin.version>2.8.1</cyclonedx-maven-plugin.version>
+    <cyclonedx-maven-plugin.version>2.9.1</cyclonedx-maven-plugin.version>
     <findsecbugs-plugin.version>1.13.0</findsecbugs-plugin.version>
-    <maven-checkstyle-plugin.version>3.5.0</maven-checkstyle-plugin.version>
+    <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
     <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-    <maven-dependency-plugin.version>3.8.0</maven-dependency-plugin.version>
+    <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
     <maven-deploy-plugin.version>3.1.3</maven-deploy-plugin.version>
     <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
     <maven-install-plugin.version>3.1.3</maven-install-plugin.version>
     <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-    <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-    <maven-surefire-plugin.version>3.5.0</maven-surefire-plugin.version>
-    <spotbugs-maven-plugin.version>4.8.6.3</spotbugs-maven-plugin.version>
-    <spotbugs.version>4.8.5</spotbugs.version>
-    <spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
-    <versions-maven-plugin.version>2.17.1</versions-maven-plugin.version>
+    <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+    <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+    <spotbugs-maven-plugin.version>4.8.6.6</spotbugs-maven-plugin.version>
+    <spotbugs.version>4.9.0</spotbugs.version>
+    <spotless-maven-plugin.version>2.44.2</spotless-maven-plugin.version>
+    <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
   </properties>
 
   <dependencies>
@@ -159,7 +159,7 @@
             <banDuplicatePomDependencyVersions />
             <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-26.0.0,druid-30.0.0</profiles>
+              <profiles>druid-30.0.0,druid-30.0.1,druid-31.0.1</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
@@ -311,25 +311,6 @@
   -->
   <profiles>
     <profile>
-      <id>druid-26.0.0</id>
-      <properties>
-        <java.version>11</java.version>
-        <druid.version>26.0.0</druid.version>
-        <guava.version>16.0.1</guava.version>
-        <guice.version>4.1.0</guice.version>
-        <jackson.version>2.10.5</jackson.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.apache.druid</groupId>
-          <artifactId>druid-processing</artifactId>
-          <version>${druid.version}</version>
-          <scope>provided</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <!-- LTS version as of 24.7 -->
       <id>druid-30.0.0</id>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -340,6 +321,60 @@
         <guava.version>32.0.1-jre</guava.version>
         <guice.version>4.1.0</guice.version>
         <!-- jackson.version in 30.0.0 is actually specified as 2.12.7.20221012 but according to the release notes https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1: https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom so we override that here -->
+        <jackson.version>2.12.7</jackson.version>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.12.7.1</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.druid</groupId>
+          <artifactId>druid-processing</artifactId>
+          <version>${druid.version}</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>druid-30.0.1</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <java.version>17</java.version>
+        <druid.version>30.0.1</druid.version>
+        <guava.version>32.0.1-jre</guava.version>
+        <guice.version>4.1.0</guice.version>
+        <!-- jackson.version in 30.0.1 is actually specified as 2.12.7.20221012 but according to the release notes https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1: https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom so we override that here -->
+        <jackson.version>2.12.7</jackson.version>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.12.7.1</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.druid</groupId>
+          <artifactId>druid-processing</artifactId>
+          <version>${druid.version}</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <!-- LTS version as of 25.3 -->
+      <id>druid-31.0.1</id>
+      <properties>
+        <java.version>17</java.version>
+        <druid.version>31.0.1</druid.version>
+        <guava.version>32.0.1-jre</guava.version>
+        <guice.version>4.1.0</guice.version>
+        <!-- jackson.version in 31.0.1 is actually specified as 2.12.7.20221012 but according to the release notes https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1: https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom so we override that here -->
         <jackson.version>2.12.7</jackson.version>
       </properties>
       <dependencies>
