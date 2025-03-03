@@ -7,10 +7,12 @@
 - Added support for Druid 30.0.0 and removed support for Druid 27.0.0 ([#104]).
 - Removed support for Druid 28.0.1 ([#105]).
 - Update dependencies ([#106]).
+- Updated Maven plugin versions, added support for Druid 31.0.1 and 30.0.1, removed support for Druid 26.0.0 ([#110]).
 
 [#104]: https://github.com/stackabletech/druid-opa-authorizer/pull/104
 [#105]: https://github.com/stackabletech/druid-opa-authorizer/pull/105
 [#106]: https://github.com/stackabletech/druid-opa-authorizer/pull/106
+[#110]: https://github.com/stackabletech/druid-opa-authorizer/pull/110
 
 ## [0.6.0] - 2024-03-19
 
