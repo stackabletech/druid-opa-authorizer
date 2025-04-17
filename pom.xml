@@ -313,7 +313,7 @@
     <profile>
       <id>druid-30.0.0</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
         <java.version>17</java.version>
@@ -341,7 +341,7 @@
     <profile>
       <id>druid-30.0.1</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
         <java.version>17</java.version>
