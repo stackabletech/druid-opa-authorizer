@@ -14,7 +14,7 @@ This project was tested against these Druid versions:
 
 This repository uses Maven and requires at least Java 11 to build:
 
-        mvn --activate-profiles druid-31.0.1 clean package
+        mvn -P druid-31.0.1 clean package
 
 Please check that the Druid version you are building for is supported and adopt the profile accordingly.
 The result of this is a JAR file in the `target` directory.
