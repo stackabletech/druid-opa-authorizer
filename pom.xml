@@ -159,7 +159,7 @@
             <banDuplicatePomDependencyVersions />
             <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-30.0.0,druid-30.0.1,druid-31.0.1</profiles>
+              <profiles>druid-30.0.1,druid-31.0.1,druid-33.0.0</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
@@ -311,38 +311,19 @@
   -->
   <profiles>
     <profile>
-      <id>druid-30.0.0</id>
-      <properties>
-        <java.version>17</java.version>
-        <druid.version>30.0.0</druid.version>
-        <guava.version>32.0.1-jre</guava.version>
-        <guice.version>4.1.0</guice.version>
-        <!-- jackson.version in 30.0.0 is actually specified as 2.12.7.20221012 but according to the release notes https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1: https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom so we override that here -->
-        <jackson.version>2.12.7</jackson.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
-          <version>2.12.7.1</version>
-          <scope>provided</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.apache.druid</groupId>
-          <artifactId>druid-processing</artifactId>
-          <version>${druid.version}</version>
-          <scope>provided</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
       <id>druid-30.0.1</id>
       <properties>
         <java.version>17</java.version>
         <druid.version>30.0.1</druid.version>
         <guava.version>32.0.1-jre</guava.version>
         <guice.version>4.1.0</guice.version>
-        <!-- jackson.version in 30.0.1 is actually specified as 2.12.7.20221012 but according to the release notes https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1: https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom so we override that here -->
+        <!--
+        jackson.version in 33.0.1 is actually specified as 2.12.7.20221012 but according to the release notes
+        https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which
+        specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1:
+        https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom
+        so we override that here
+        -->
         <jackson.version>2.12.7</jackson.version>
       </properties>
       <dependencies>
@@ -368,7 +349,44 @@
         <druid.version>31.0.1</druid.version>
         <guava.version>32.0.1-jre</guava.version>
         <guice.version>4.1.0</guice.version>
-        <!-- jackson.version in 31.0.1 is actually specified as 2.12.7.20221012 but according to the release notes https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1: https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom so we override that here -->
+        <!--
+        jackson.version in 31.0.1 is actually specified as 2.12.7.20221012 but according to the release notes
+        https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which
+        specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1:
+        https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom
+        so we override that here
+        -->
+        <jackson.version>2.12.7</jackson.version>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.12.7.1</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.druid</groupId>
+          <artifactId>druid-processing</artifactId>
+          <version>${druid.version}</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>druid-33.0.0</id>
+      <properties>
+        <java.version>17</java.version>
+        <druid.version>33.0.0</druid.version>
+        <guava.version>32.0.1-jre</guava.version>
+        <guice.version>4.1.0</guice.version>
+        <!--
+        jackson.version in 33.0.0 is actually specified as 2.12.7.20221012 but according to the release notes
+        https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which
+        specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1:
+        https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom
+        so we override that here
+        -->
         <jackson.version>2.12.7</jackson.version>
       </properties>
       <dependencies>
