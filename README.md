@@ -6,15 +6,15 @@ An Apache Druid extension to request policy decisions from [Open Policy Agent](h
 
 This project was tested against these Druid versions:
 
-- 30.0.0
 - 30.0.1
 - 31.0.1
+- 33.0.0
 
 ## Building
 
 This repository uses Maven and requires at least Java 11 to build:
 
-        mvn -P druid-31.0.1 clean package
+        mvn -P druid-33.0.0 clean package
 
 Please check that the Druid version you are building for is supported and adopt the profile accordingly.
 The result of this is a JAR file in the `target` directory.
