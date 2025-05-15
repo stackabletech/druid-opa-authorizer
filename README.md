@@ -16,7 +16,7 @@ This repository uses Maven and requires at least Java 11 to build:
 
         mvn -P druid-33.0.0 clean package
 
-Please check that the Druid version you are building for is supported and adopt the profile accordingly.
+Please check that the Druid version you are building for is supported and adapt the profile accordingly.
 The result of this is a JAR file in the `target` directory.
 
 ## Installing
