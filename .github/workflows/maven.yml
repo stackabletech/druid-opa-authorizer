@@ -24,10 +24,10 @@ jobs:
           - {druid: druid-31.0.1, java: '17'}
           - {druid: druid-33.0.0, java: '17'}
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Set up JDK
-        uses: actions/setup-java@2dfa2011c5b2a0f1489bf9e433881c92c1631f88 # v4.3.0
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
           java-version: ${{ matrix.profile.java }}
           distribution: 'temurin'
@@ -38,4 +38,6 @@ jobs:
 
       - name: Update dependency graph
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: advanced-security/maven-dependency-submission-action@4f64ddab9d742a4806eeb588d238e4c311a8397d # v4.1.1
+        uses: advanced-security/maven-dependency-submission-action@aeab9f885293af501bae8bdfe88c589528ea5e25 # v4.1.2
+        with:
+          maven-args: '-P${{matrix.profile.druid}}'
