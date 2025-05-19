@@ -51,7 +51,7 @@ jobs:
           release-branch-name: "main"
 
       - name: Release to GitHub
-        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v2.0.8
+        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # v2.2.2
         with:
           files: |
             target/checkout/target/*.jar
