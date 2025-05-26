@@ -29,6 +29,11 @@ jobs:
     # permissions:
     #   contents: write
     steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17' # todo: get this from the matrix
+
       - name: mvn stuff
         run: |
           : build version strings
