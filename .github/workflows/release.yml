@@ -49,7 +49,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           maven-release-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
           maven-development-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.next-stackable-version }}-SNAPSHOT
-          release-branch-name: "main"
+          release-branch-name: "fix/release-workflow"
 
       - run: |
           set +e
