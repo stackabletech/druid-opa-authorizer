@@ -4,7 +4,7 @@
 
   <groupId>tech.stackable</groupId>
   <artifactId>druid-opa-authorizer</artifactId>
-  <version>26.0.0-stackable0</version>
+  <version>27.0.0-stackable0-SNAPSHOT</version>
 
   <name>Apache Druid OpenPolicyAgent Authorizer</name>
   <url>https://github.com/stackabletech/druid-opa-authorizer/</url>
