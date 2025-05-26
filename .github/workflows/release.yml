@@ -49,9 +49,10 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           maven-release-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.stackable-version }}
           maven-development-version-number: ${{ github.event.inputs.druid-version }}-stackable${{ github.event.inputs.next-stackable-version }}-SNAPSHOT
-          release-branch-name: "fix/release-workflow"
+          release-branch-name: "release-workflow" # it strips the leading "fix/"
 
-      - run: |
+      - if: always()
+        run: |
           set +e
           ls -al
           ls -al target
