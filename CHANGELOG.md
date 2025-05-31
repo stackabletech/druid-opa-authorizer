@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.7.0] - 2025-05-31
+
 ### Added
 
 - Add support for Druid 30.0.1, 31.0.1, and 33.0.0 ([#110], [#112]).
