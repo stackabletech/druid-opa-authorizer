@@ -81,5 +81,5 @@ You can increase log output for the authorizer by adding this snippet to your `l
 ### Release
 
 Currently, we do not have an automatted way of releasing this tool.
-We have a `release.yml` GitHub Action workflow but it fails as the artifact is built within a Docker action and the later steps don't have access to the final artifact.
+We have a `release.yml` GitHub Action workflow, but it fails as the artifact is built within a Docker action and the later steps don't have access to the final artifact.
 It is a failed attempt.
