@@ -35,7 +35,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <cleanthat.version>2.17</cleanthat.version>
-    <error-prone.version>2.27.1</error-prone.version>
+    <error-prone.version>2.41.0</error-prone.version>
     <google-java-format.version>1.19.2</google-java-format.version>
 
     <cyclonedx-maven-plugin.version>2.9.1</cyclonedx-maven-plugin.version>
