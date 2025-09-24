@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.8.0] - 2025-09-25
+
 ### Added
 
 - Add support for Druid 34.0.0 ([#134]).
