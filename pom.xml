@@ -328,7 +328,7 @@
         https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom
         so we override that here
         -->
-        <jackson.version>2.12.7</jackson.version>
+        <jackson.version>2.15.0</jackson.version>
       </properties>
       <dependencies>
         <dependency>
