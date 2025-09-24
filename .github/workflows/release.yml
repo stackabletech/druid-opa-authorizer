@@ -10,8 +10,8 @@ on:
         type: choice
         options:
           - druid-30.0.1
-          - druid-31.0.1
           - druid-33.0.0
+          - druid-34.0.0
       stackable-version:
         description: 'The stackable "patch" version to use for this release (e.g., "0").'
         required: true
