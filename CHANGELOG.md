@@ -4,13 +4,16 @@
 
 ### Added
 
-- Add support for Druid 34.0.0 ([#134]).
+- Add support for Druid 35.0.1 ([#138]).
+- Add support for Druid 34.0.0 (deprecated) ([#134], [#138]).
 
 ### Removed
 
+- Remove support for Druid 33.0.0 ([#138]).
 - Remove support for Druid 31.0.1 ([#134]).
 
 [#134]: https://github.com/stackabletech/druid-opa-authorizer/pull/134
+[#138]: https://github.com/stackabletech/druid-opa-authorizer/pull/138
 
 ## [0.7.0] - 2025-05-31
 
