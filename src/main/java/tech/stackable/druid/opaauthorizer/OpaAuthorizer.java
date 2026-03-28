@@ -24,10 +24,12 @@ public class OpaAuthorizer implements Authorizer {
   private static final Logger LOG = new Logger(OpaAuthorizer.class);
   private final String opaUri;
   private final ObjectMapper objectMapper;
+  private final HttpClient httpClient;
 
   @JsonCreator
   public OpaAuthorizer(@JsonProperty("name") String name, @JsonProperty("opaUri") String opaUri) {
     this.opaUri = opaUri;
+    httpClient = HttpClient.newHttpClient();
     objectMapper =
         new ObjectMapper()
             // https://github.com/stackabletech/druid-opa-authorizer/issues/72
@@ -53,8 +55,7 @@ public class OpaAuthorizer implements Authorizer {
       return new Access(false, "Failed to create the OPA request JSON: " + e);
     }
 
-    LOG.trace("Creating HTTP Client and executing post.");
-    var client = HttpClient.newHttpClient();
+    LOG.trace("Executing HTTP post.");
     try {
       var request =
           HttpRequest.newBuilder()
@@ -63,7 +64,7 @@ public class OpaAuthorizer implements Authorizer {
               .POST(HttpRequest.BodyPublishers.ofString(msgJson))
               .build();
 
-      var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      var response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
       LOG.debug("OPA Response code: %s - %s", response.statusCode(), response.body());
       LOG.trace("Parsing OPA response.");
