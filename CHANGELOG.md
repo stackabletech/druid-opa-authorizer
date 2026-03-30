@@ -7,6 +7,10 @@
 - Add support for Druid 35.0.1 ([#138]).
 - Add support for Druid 34.0.0 (deprecated) ([#134], [#138]).
 
+### Changed
+
+- Changed license from OSL to Apache 2.0 ([#141]).
+
 ### Removed
 
 - Remove support for Druid 33.0.0 ([#138]).
