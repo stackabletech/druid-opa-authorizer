@@ -67,7 +67,6 @@
 [#61]: https://github.com/stackabletech/druid-opa-authorizer/pull/61
 [#74]: https://github.com/stackabletech/druid-opa-authorizer/pull/74
 [#75]: https://github.com/stackabletech/druid-opa-authorizer/pull/75
-[#143]: https://github.com/stackabletech/druid-opa-authorizer/pull/143
 
 ## [0.3.0] - 2022-10-13
 
