@@ -11,6 +11,10 @@
 
 - Changed license from OSL to Apache 2.0 ([#141]).
 
+### Fixed
+
+- Reuse HttpClient instance across authorize() calls ([#143]).
+
 ### Removed
 
 - Remove support for Druid 33.0.0 ([#138]).
@@ -18,6 +22,8 @@
 
 [#134]: https://github.com/stackabletech/druid-opa-authorizer/pull/134
 [#138]: https://github.com/stackabletech/druid-opa-authorizer/pull/138
+[#141]: https://github.com/stackabletech/druid-opa-authorizer/pull/141
+[#143]: https://github.com/stackabletech/druid-opa-authorizer/pull/143
 
 ## [0.7.0] - 2025-05-31
 
