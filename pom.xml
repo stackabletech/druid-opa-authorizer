@@ -13,9 +13,10 @@
     <url>https://stackable.tech</url>
   </organization>
   <licenses>
-    <license>
-      <name>OSL-3.0</name>
-    </license>
+      <license>
+          <name>Apache License, Version 2.0</name>
+          <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+      </license>
   </licenses>
   <scm>
     <connection>scm:git:${project.scm.url}</connection>
