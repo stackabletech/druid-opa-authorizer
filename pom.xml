@@ -325,6 +325,33 @@
         <guice.version>6.0.0</guice.version>
         <jackson.version>2.20.2</jackson.version>
       </properties>
+      <dependencies>
+        <!--
+          We need to set the jackson-annotations version here, because 2.20.2 doesn't exist.
+          See: https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-annotations/2.20/versions
+        -->
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+          <version>2.20</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+      <!--
+        We need to override the guice version using <dependencyManagement> here, otherwise maven chooses the highest
+        possible version in the range given by https://github.com/FasterXML/jackson-modules-base/blob/jackson-modules-base-2.18.4/guice/pom.xml#L30
+        which for some reason also wins in the conflict resolution, resulting in another version of the dependency than druid uses
+      -->
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+            <scope>provided</scope>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
     </profile>
     <profile>
       <!-- Deprecated in SDP 26.7 -->
