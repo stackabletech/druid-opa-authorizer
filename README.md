@@ -6,13 +6,13 @@ An Apache Druid extension to request policy decisions from [Open Policy Agent](h
 
 This project was tested against these Druid versions:
 
-- 37.0.0 (LTS)
-- 35.0.1 (Deprecated)
-- 30.0.1 (Deprecated)
+- 37.0.0
+- 35.0.1
+- 30.0.1
 
 ## Building
 
-This repository uses Maven and requires at least Java 11 to build:
+This repository uses Maven and requires at least Java 17/21 (depending on the Druid version) to build:
 
         mvn -P druid-37.0.0 clean package
 

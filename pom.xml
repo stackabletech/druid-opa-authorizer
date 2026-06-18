@@ -339,7 +339,7 @@
       </dependencies>
       <!--
         We need to override the guice version using <dependencyManagement> here, otherwise maven chooses the highest
-        possible version in the range given by https://github.com/FasterXML/jackson-modules-base/blob/jackson-modules-base-2.18.4/guice/pom.xml#L30
+        possible version in the range given by https://github.com/FasterXML/jackson-modules-base/blob/jackson-modules-base-2.20.2/guice/pom.xml#L30
         which for some reason also wins in the conflict resolution, resulting in another version of the dependency than druid uses
       -->
       <dependencyManagement>
