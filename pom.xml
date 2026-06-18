@@ -164,7 +164,7 @@
             <banDuplicatePomDependencyVersions />
             <banDynamicVersions />
             <requireActiveProfile>
-              <profiles>druid-30.0.1,druid-34.0.0,druid-35.0.1</profiles>
+              <profiles>druid-37.0.0,druid-35.0.1,druid-30.0.1</profiles>
               <all>false</all>
             </requireActiveProfile>
             <requireJavaVersion>
@@ -316,56 +316,30 @@
   -->
   <profiles>
     <profile>
-      <!-- LTS version since SDP 25.3 (30.0.0 in 24.11)-->
-      <id>druid-30.0.1</id>
+      <!-- LTS version since SDP 26.7 -->
+      <id>druid-37.0.0</id>
       <properties>
-        <java.version>17</java.version>
-        <druid.version>30.0.1</druid.version>
-        <guava.version>32.0.1-jre</guava.version>
-        <guice.version>4.1.0</guice.version>
-        <!--
-        jackson.version in 33.0.1 is actually specified as 2.12.7.20221012 but according to the release notes
-        https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which
-        specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1:
-        https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom
-        so we override that here
-        -->
-        <jackson.version>2.12.7</jackson.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
-          <version>2.12.7.1</version>
-          <scope>provided</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <!-- Deprecated in SDP 26.3 -->
-      <id>druid-34.0.0</id>
-      <properties>
-        <java.version>17</java.version>
-        <druid.version>34.0.0</druid.version>
+        <java.version>21</java.version>
+        <druid.version>37.0.0</druid.version>
         <guava.version>32.1.3-jre</guava.version>
-        <guice.version>5.1.0</guice.version>
-        <jackson.version>2.18.4</jackson.version>
+        <guice.version>6.0.0</guice.version>
+        <jackson.version>2.20.2</jackson.version>
       </properties>
       <dependencies>
         <!--
-        In druid-server 34.0.0 all the jackson dependencies are specified to be 2.18.4 with the exception of jackson-core which is at 2.18.4.1:
-        https://github.com/apache/druid/blob/druid-34.0.0/pom.xml#L103, so we override that here
+          We need to set the jackson-annotations version here, because 2.20.2 doesn't exist.
+          See: https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-annotations/2.20/versions
         -->
         <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-core</artifactId>
-          <version>2.18.4.1</version>
+          <artifactId>jackson-annotations</artifactId>
+          <version>2.20</version>
           <scope>provided</scope>
         </dependency>
       </dependencies>
       <!--
         We need to override the guice version using <dependencyManagement> here, otherwise maven chooses the highest
-        possible version in the range given by https://github.com/FasterXML/jackson-modules-base/blob/jackson-modules-base-2.18.4/guice/pom.xml#L30
+        possible version in the range given by https://github.com/FasterXML/jackson-modules-base/blob/jackson-modules-base-2.20.2/guice/pom.xml#L30
         which for some reason also wins in the conflict resolution, resulting in another version of the dependency than druid uses
       -->
       <dependencyManagement>
@@ -380,7 +354,7 @@
       </dependencyManagement>
     </profile>
     <profile>
-      <!-- Supported since SPD 26.3 -->
+      <!-- Deprecated in SDP 26.7 -->
       <id>druid-35.0.1</id>
       <properties>
         <java.version>21</java.version>
@@ -404,6 +378,32 @@
           </dependency>
         </dependencies>
       </dependencyManagement>
+    </profile>
+    <profile>
+      <!-- Deprecated in SDP 26.7 -->
+      <id>druid-30.0.1</id>
+      <properties>
+        <java.version>17</java.version>
+        <druid.version>30.0.1</druid.version>
+        <guava.version>32.0.1-jre</guava.version>
+        <guice.version>4.1.0</guice.version>
+        <!--
+        jackson.version in 33.0.1 is actually specified as 2.12.7.20221012 but according to the release notes
+        https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.12#micro-patches that is "only" the BOM which
+        specifies almost all dependencies to be 2.12.7 with the exception of jackson-databind which is at 2.12.7.1:
+        https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.12.7.20221012/jackson-bom-2.12.7.20221012.pom
+        so we override that here
+        -->
+        <jackson.version>2.12.7</jackson.version>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.12.7.1</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
     </profile>
   </profiles>
 
