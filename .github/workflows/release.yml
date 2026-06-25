@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       druid-version:
-        description: 'Select the Druid version to build the authorizer for.'
+        description: "Select the Druid version to build the authorizer for."
         required: true
         type: choice
         options:
@@ -19,21 +19,31 @@ on:
         description: 'The next stackable version to use, this updates the POM (without the "-SNAPSHOT"). If stackable-version is 0 then set this to 1 etc.'
         required: true
 
+permissions: {}
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      # Write is needed to draft the release
+      # See https://github.com/softprops/action-gh-release/blob/153bb8e04406b158c6c84fc1615b65b24149a1fe/README.md?plain=1#L281
+      contents: write
 
     steps:
       - name: Set Java Version
         id: set_java_version
+        env:
+          DRUID_VERSION: ${{ github.event.inputs.druid-version }}
         run: |
-          if [ "${{ github.event.inputs.druid-version }}" == "druid-30.0.0" ] || [ "${{ github.event.inputs.druid-version }}" == "druid-30.0.1" ] || [ "${{ github.event.inputs.druid-version }}" == "druid-31.0.1" ]; then
+          if [ "$DRUID_VERSION" == "druid-30.0.0" ] || [ "$DRUID_VERSION" == "druid-30.0.1" ] || [ "$DRUID_VERSION" == "druid-31.0.1" ]; then
             echo "JAVA_VERSION=17" >> "$GITHUB_ENV"
           else
             echo "JAVA_VERSION=unknown" >> "$GITHUB_ENV"
           fi
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Release
         uses: qcastel/github-actions-maven-release@0fd7a9e2ba3a4af8728a88cf57b11592fd8bdd0f # v1.12.43
