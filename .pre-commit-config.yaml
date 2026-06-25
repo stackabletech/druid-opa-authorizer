@@ -1,0 +1,40 @@
+---
+default_language_version:
+  node: system
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # 6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: detect-aws-credentials
+        args: ["--allow-missing-credentials"]
+      - id: detect-private-key
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: 79a6b2b1392eaf49cdd32ac4f14be1a809bbd8f7 # 1.37.1
+    hooks:
+      - id: yamllint
+        args: ["--strict"]
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: 192ad822316c3a22fb3d3cc8aa6eafa0b8488360 # 0.45.0
+    hooks:
+      - id: markdownlint
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: 99470f5e12208ff0fb17ab81c3c494f7620a1d8d # 0.11.0
+    hooks:
+      - id: shellcheck
+        args: ["--severity=info"]
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: e7d448ef7507c20fc4c88a95d0c448b848cd6127 # 1.7.8
+    hooks:
+      - id: actionlint
+
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: 7fc963270df722f37707d47ff41265fe8f460822 # v1.20.0
+    hooks:
+      - id: zizmor
+        args: ["--no-progress", "--min-confidence", "medium"]
