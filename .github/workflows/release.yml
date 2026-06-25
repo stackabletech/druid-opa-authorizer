@@ -19,9 +19,15 @@ on:
         description: 'The next stackable version to use, this updates the POM (without the "-SNAPSHOT"). If stackable-version is 0 then set this to 1 etc.'
         required: true
 
+permissions: {}
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      # Write is needed to draft the release
+      # See https://github.com/softprops/action-gh-release/blob/153bb8e04406b158c6c84fc1615b65b24149a1fe/README.md?plain=1#L281
+      contents: write
 
     steps:
       - name: Set Java Version

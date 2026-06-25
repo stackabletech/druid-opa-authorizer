@@ -13,6 +13,8 @@ on:
   pull_request:
   merge_group:
 
+permissions: {}
+
 jobs:
   build:
     runs-on: ubuntu-latest
