@@ -8,9 +8,14 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-yaml
+      - id: check-xml
+      - id: detect-private-key
       - id: detect-aws-credentials
         args: ["--allow-missing-credentials"]
-      - id: detect-private-key
 
   - repo: https://github.com/adrienverge/yamllint
     rev: 79a6b2b1392eaf49cdd32ac4f14be1a809bbd8f7 # 1.37.1
@@ -22,11 +27,15 @@ repos:
     rev: 192ad822316c3a22fb3d3cc8aa6eafa0b8488360 # 0.45.0
     hooks:
       - id: markdownlint
+        types: [text]
+        files: \.md(\.j2)*$
+
   - repo: https://github.com/koalaman/shellcheck-precommit
     rev: 99470f5e12208ff0fb17ab81c3c494f7620a1d8d # 0.11.0
     hooks:
       - id: shellcheck
         args: ["--severity=info"]
+
 
   - repo: https://github.com/rhysd/actionlint
     rev: e7d448ef7507c20fc4c88a95d0c448b848cd6127 # 1.7.8

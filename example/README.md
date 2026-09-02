@@ -22,26 +22,26 @@ In Druid in your common `runtime.properties` add the following:
     # Druid basic security
     druid.auth.authenticatorChain=["basicAuthenticator"]
     druid.auth.authenticator.basicAuthenticator.type=basic
-    
+
     # Default password for 'admin' user, should be changed for production.
     druid.auth.authenticator.basicAuthenticator.initialAdminPassword=password1
-    
+
     # Default password for internal 'druid_system' user, should be changed for production.
     druid.auth.authenticator.basicAuthenticator.initialInternalClientPassword=password2
-    
+
     # Uses the metadata store for storing users, you can use authentication API to create new users and grant permissions
     druid.auth.authenticator.basicAuthenticator.credentialsValidator.type=metadata
-    
+
     # If true and the request credential doesn't exists in this credentials store, the request will proceed to next Authenticator in the chain.
     druid.auth.authenticator.basicAuthenticator.skipOnFailure=false
     druid.auth.authenticator.basicAuthenticator.authorizerName=opaAuthorizer
-    
+
     # Escalator
     druid.escalator.type=basic
     druid.escalator.internalClientUsername=druid_system
     druid.escalator.internalClientPassword=password2
     druid.escalator.authorizerName=opaAuthorizer
-    
+
     druid.auth.authorizers=["opaAuthorizer"]
     druid.auth.authorizer.opaAuthorizer.type=opa
     druid.auth.authorizer.opaAuthorizer.opaUri=http://localhost:8181/v1/data/app/druid/allow

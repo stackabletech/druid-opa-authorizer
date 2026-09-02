@@ -12,9 +12,10 @@ This project was tested against these Druid versions:
 
 ## Building
 
-This repository uses Maven and requires at least Java 17/21 (depending on the Druid version) to build:
+This repository uses Maven and requires at least Java 17/21 (depending on the Druid version) to build.
+Use the bundled Maven Wrapper so the build uses a pinned Maven version:
 
-        mvn -P druid-37.0.0 clean package
+        ./mvnw -P druid-37.0.0 clean package
 
 Please check that the Druid version you are building for is supported and adapt the profile accordingly.
 The result of this is a JAR file in the `target` directory.
