@@ -22,8 +22,6 @@ jobs:
     strategy:
       matrix:
         profile:
-          - {druid: druid-30.0.1, java: '17'}
-          - {druid: druid-35.0.1, java: '21'}
           - {druid: druid-37.0.0, java: '21'}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

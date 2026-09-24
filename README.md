@@ -7,8 +7,6 @@ An Apache Druid extension to request policy decisions from [Open Policy Agent](h
 This project was tested against these Druid versions:
 
 - 37.0.0
-- 35.0.1
-- 30.0.1
 
 ## Building
 
