@@ -19,11 +19,13 @@
 
 - Remove support for Druid 33.0.0 ([#138]).
 - Remove support for Druid 31.0.1 ([#134]).
+- Remove support for Druid 30.0.1, 35.0.1 ([#149]).
 
 [#134]: https://github.com/stackabletech/druid-opa-authorizer/pull/134
 [#138]: https://github.com/stackabletech/druid-opa-authorizer/pull/138
 [#141]: https://github.com/stackabletech/druid-opa-authorizer/pull/141
 [#143]: https://github.com/stackabletech/druid-opa-authorizer/pull/143
+[#149]: https://github.com/stackabletech/druid-opa-authorizer/pull/149
 
 ## [0.7.0] - 2025-05-31
 
